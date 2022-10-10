@@ -57,6 +57,4 @@ Route::get('student/notice',[StudentController::class,'notice']);
 // Parent Routes
 
 Route::get('parent/dashboard',[ParentController::class,'parent_dashboard']);
-Route::get('status',function(){
-    return "Hello";
-});
+
