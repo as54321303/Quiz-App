@@ -26,35 +26,43 @@ Route::get('main',function(){
 
 // Admin Routes
 
-Route::get('admin/dashboard',[AdminController::class,'admin_dashboard']);
-Route::get('admin/all-students',[AdminController::class,'all_students']);
-Route::get('admin/student-details',[AdminController::class,'student_details']);
-Route::get('admin/all-teachers',[AdminController::class,'all_teachers']);
-Route::get('admin/teacher-details',[AdminController::class,'teacher_details']);
-Route::get('admin/all-parents',[AdminController::class,'all_parents']);
-Route::get('admin/parent-deatils',[AdminController::class,'parent_details']);
-Route::get('admin/parent-deatils',[AdminController::class,'parent_details']);
-Route::get('admin/groups',[AdminController::class,'groups']);
-Route::get('admin/quiz-schedule',[AdminController::class,'quiz_schedule']);
-Route::get('admin/quiz-grades',[AdminController::class,'quiz_grades']);
+Route::prefix('admin')->group(function () {
+    Route::get('dashboard', [AdminController::class,'admin_dashboard']);
+    Route::get('all-students',[AdminController::class,'all_students']);
+    Route::get('student-details',[AdminController::class,'student_details']);
+    Route::get('all-teachers',[AdminController::class,'all_teachers']);
+    Route::get('teacher-details',[AdminController::class,'teacher_details']);
+    Route::get('all-parents',[AdminController::class,'all_parents']);
+    Route::get('parent-deatils',[AdminController::class,'parent_details']);
+    Route::get('parent-deatils',[AdminController::class,'parent_details']);
+    Route::get('groups',[AdminController::class,'groups']);
+    Route::get('quiz-schedule',[AdminController::class,'quiz_schedule']);
+    Route::get('quiz-grades',[AdminController::class,'quiz_grades']);
+});
 
 // Teacher Routes
+Route::prefix('teacher')->group(function () {
+    Route::get('dashboard',[TeacherController::class,'teacher_dashboard']);
+    Route::get('all-students',[TeacherController::class,'all_students']);
+    Route::get('student-details',[TeacherController::class,'student_details']);
+    Route::get('groups',[TeacherController::class,'groups']);
+    Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
+    Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
+});
 
-Route::get('teacher/dashboard',[TeacherController::class,'teacher_dashboard']);
-Route::get('teacher/all-students',[TeacherController::class,'all_students']);
-Route::get('teacher/student-details',[TeacherController::class,'student_details']);
-Route::get('teacher/groups',[TeacherController::class,'groups']);
-Route::get('teacher/quiz-schedule',[TeacherController::class,'quiz_schedule']);
-Route::get('teacher/quiz-grades',[TeacherController::class,'quiz_grades']);
+
 
 // Student Routes
+Route::prefix('student')->group(function () {
+    Route::get('dashboard',[StudentController::class,'student_dashboard']);
+    Route::get('quiz-schedule',[StudentController::class,'quiz_schedule']);
+    Route::get('quiz-grades',[StudentController::class,'quiz_grades']);
+    Route::get('notice',[StudentController::class,'notice']);
+});
 
-Route::get('student/dashboard',[StudentController::class,'student_dashboard']);
-Route::get('student/quiz-schedule',[StudentController::class,'quiz_schedule']);
-Route::get('student/quiz-grades',[StudentController::class,'quiz_grades']);
-Route::get('student/notice',[StudentController::class,'notice']);
 
 // Parent Routes
-
-Route::get('parent/dashboard',[ParentController::class,'parent_dashboard']);
+Route::prefix('parent')->group(function () {
+    Route::get('dashboard',[ParentController::class,'parent_dashboard']);    
+});
 
