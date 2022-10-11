@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
+use App\Models\Admin;
+use Validator;
 
 class AdminController extends Controller
 {
+
+    public function login()
+    {
+        return view('admin.login');
+    }
+    
+    public function signup()
+    {
+        return view('admin.signup');
+    }
+    
+    public function signup_post(Request $request)
+    {
+        // $validator = 
+    }
+
     public function admin_dashboard()
     {
         return view('admin.dashboard');

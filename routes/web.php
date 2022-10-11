@@ -27,6 +27,12 @@ Route::get('main',function(){
 // Admin Routes
 
 Route::prefix('admin')->group(function () {
+    Route::get('login', [AdminController::class,'login'])->name('adminLogin');
+    Route::post('login_post', [AdminController::class,'login_post'])->name('login-post');
+
+    Route::get('signup', [AdminController::class,'signup'])->name('adminSignup');
+    Route::post('signup-post', [AdminController::class,'signup_post'])->name('adminSignupPost');
+    
     Route::get('dashboard', [AdminController::class,'admin_dashboard']);
     Route::get('all-students',[AdminController::class,'all_students']);
     Route::get('student-details',[AdminController::class,'student_details']);
