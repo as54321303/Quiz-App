@@ -9,8 +9,8 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
         body {
-            width: 100vw;
-            height: 100vh;
+            /* width: 100vw;
+            height: 100vh; */
             background-color: #C2CFFA;
             /* background-color: #11c8aa   ; */
         }
@@ -32,6 +32,16 @@
         <div class="row">
             <div class="col-12">
                 <!-- form here -->
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <p><strong>Opps Something went wrong</strong></p>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-group d-flex justify-content-start">
                         <span class="text-left">
                             <a href="{{ route('adminLogin') }}" class="text-primary">Already Have an Account? Login Instead</a>
@@ -52,6 +62,10 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="*******">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword14">Re-enter Password</label>
+                        <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword14" placeholder="*******">
                     </div>
                     <div class="form-group d-flex justify-content-end">
                         <small class="text-right">
