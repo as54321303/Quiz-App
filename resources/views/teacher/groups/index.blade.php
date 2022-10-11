@@ -26,6 +26,18 @@
     <!-- Breadcubs Area End Here -->
     <!-- Student Table Area Start Here -->
     <div class="card height-auto">
+
+        @if(session('status'))
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('status')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {{session()->flush()}}
+        @endif
+
         <div class="card-body">
             <div class="heading-layout1">
                 <h3>All Groups</h3>
@@ -49,6 +61,8 @@
                             <th>Group Name</th>
                             {{-- <th>Gender</th> --}}
                             <th>Class</th>
+                            <th>Total Members</th>
+                            <th>Total Points</th>
                            {{--  <th>Parents</th>
                             <th>Address</th>
                             <th>Date Of Birth</th>
@@ -70,6 +84,8 @@
                             {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
                             <td>Toppers Group</td>
                             <td>10</td>
+                            <td>5</td>
+                            <td>10</td>
                             {{-- <td>2</td>
                             <td>A</td>
                             <td>Jack Sparrow </td>
@@ -77,7 +93,11 @@
                             <td>02/05/2001</td>
                             <td>+ 123 9988568</td>
                             <td>kazifahim93@gmail.com</td> --}}
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
+                            <td>
+                                <a href="{{url('teacher/group-detail')}}"><button class="btn btn-primary btn-lg">Show</button></a>
+                                <a href="{{url('teacher/assign-points')}}"><button class="btn btn-primary btn-lg">Assign Point</button></a>
+                            </td>
+                           
                             {{-- <td>
                                 <div class="form-check form-switch form-check">
                                     <input class="form-check-input form-control" type="checkbox" id="">
@@ -112,6 +132,8 @@
                             {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
                             <td>Backbenchers Group</td>
                             <td>10</td>
+                            <td>5</td>
+                            <td>15</td>
                             {{-- <td>2</td> --}}
                             {{-- <td>A</td>
                             <td>Jack Sparrow </td>
@@ -119,7 +141,13 @@
                             <td>02/05/2001</td>
                             <td>+ 123 9988568</td>
                             <td>kazifahim93@gmail.com</td> --}}
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
+                            <td>
+
+                                <a href="{{url('teacher/group-detail')}}"><button class="btn btn-primary btn-lg">Show</button></a>
+
+                                <a href="{{url('teacher/assign-points')}}"><button class="btn btn-primary btn-lg">Assign Point</button></a>
+
+                            </td>
                             {{-- <td>
                                 <div class="form-check form-switch form-check">
                                     <input class="form-check-input form-control" type="checkbox" id="">
