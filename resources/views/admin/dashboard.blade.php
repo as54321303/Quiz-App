@@ -88,6 +88,9 @@
         </div> -->
     </div>
     <!-- Dashboard summery End Here -->
+    <h3>
+        {{ session('adminId') }}
+    </h3>
     <!-- Dashboard Content Start Here -->
     <div class="row gutters-20">
         <div class="col-12 col-xl-6 col-3-xxxl">
