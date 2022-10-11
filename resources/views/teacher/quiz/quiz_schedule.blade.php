@@ -19,8 +19,8 @@
     <!-- Breadcubs Area End Here -->
     <!-- Exam Schedule Area Start Here -->
     <div class="row">
-        <div class="col-4-xxxl col-12">
-            <div class="card height-auto">
+        {{-- <div class="col-4-xxxl col-12"> --}}
+            {{-- <div class="card height-auto">
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
@@ -75,7 +75,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-8-xxxl col-12">
             <div class="card height-auto">
                 <div class="card-body">

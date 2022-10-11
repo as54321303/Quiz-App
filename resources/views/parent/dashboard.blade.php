@@ -116,7 +116,7 @@
                             <div class="col-12-xxxl col-xl-6 col-12">
                                 <div class="kids-details-box mb-5">
                                     <div class="item-img">
-                                        <img src="img/figure/student.png" alt="kids">
+                                        <img src="{{url('assets/parent/img/figure/student.png')}}" alt="kids">
                                     </div>
                                     <div class="item-content table-responsive">
                                         <table class="table text-nowrap">
@@ -161,7 +161,7 @@
                             <div class="col-12-xxxl col-xl-6 col-12">
                                 <div class="kids-details-box">
                                     <div class="item-img">
-                                        <img src="img/figure/student1.png" alt="kids">
+                                        <img src="{{url('assets/parent/img/figure/student1.png')}}" alt="kids">
                                     </div>
                                     <div class="item-content table-responsive">
                                         <table class="table text-nowrap">
@@ -205,7 +205,10 @@
                             </div>
                         </div>
                     </div>
+                    <a href="{{url('parent/assign-points')}}"><button class="btn btn-primary" style="font-size:20px;">Assign Points</button></a> <br> <br>
+                    <h3 style="float-right">Total Points:50</h3>
                 </div>
+               
             </div>
         </div>
         <div class="col-xl-12 col-7-xxxl col-12">

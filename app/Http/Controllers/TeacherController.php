@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
 class TeacherController extends Controller
 {
     public function teacher_dashboard()
@@ -42,5 +42,23 @@ class TeacherController extends Controller
     public function groups()
     {
         return view('teacher.groups.index');
+    }
+
+
+    public function group_detail()
+    {
+        return view('teacher.groups.group_detail');
+    }
+
+
+    public function assign_points()
+    {
+        return view('teacher.groups.assign_points');
+    }
+
+    public function post_assign_points()
+    {
+        session()->put('status','Points Assigned Successfully');
+        return redirect('teacher/groups');
     }
 }
