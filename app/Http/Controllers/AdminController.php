@@ -3,9 +3,85 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hash;
+use App\Models\Admin;
+use Validator;
+use session;
 
 class AdminController extends Controller
 {
+
+    public function login()
+    {
+        return view('admin.login');
+    }
+    
+    public function login_post(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' =>'required|email|exists:admins',
+            'password' =>'required'
+        ], [
+            'required' =>':attribute is required',
+            'email.exists' =>':attribute does not exist',
+        ]);
+        if($validator->fails())
+        {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $checkEmail = Admin::where(['email'=>$request->email])->first();
+
+        if( !$checkEmail || !Hash::check($request->password , $checkEmail->password)) {
+            return back()->with('err_msg', 'Invalid Email or Password');
+        } else {
+            session()->put('adminId', $checkEmail->id);
+            return redirect()->route('adminDashboard');
+        }
+
+    }
+    
+    public function signup()
+    {
+        return view('admin.signup');
+    }
+    
+    public function signup_post(Request $request)
+    {
+        // return $request;    
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "email" => "required|email|unique:admins",
+            "password" => "min:8|required_with:password_confirmation",
+            "password_confirmation" => "min:8|same:password"
+        ]);
+
+        // return $validator;
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+            // return $validator;
+        }
+
+        try {
+            $insert = new Admin;
+            $insert->name = $request->name;
+            $insert->email = $request->email;
+            $insert->password = Hash::make($request->password);
+            $insert->save();
+
+            return redirect()->route('adminLogin')->with('message','Admin Created Successfully');
+
+          } catch (\Exception $e) {
+
+              //return $e->getMessage();
+              return redirect()->route('adminSignupPost')->with('errors',$e->getMessage());
+
+          }
+        
+
+
+    }
+
     public function admin_dashboard()
     {
         return view('admin.dashboard');
