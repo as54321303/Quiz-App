@@ -66,7 +66,7 @@
                         alt="Card image cap">
                 </div>
             </a>
-            <a href="{{url('admin/dashboard')}}" class="loginCard" id="card4">
+            <a href="{{url('admin/login')}}" class="loginCard" id="card4">
                 <div class="card m-2 d-flex text-center  align-items-center p-3" style="width: 176px; height: 192px;">
                     <h5 class="text-center text-dark">Admin</h5>
                     <br>
