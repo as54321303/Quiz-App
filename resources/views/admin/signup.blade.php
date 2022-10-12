@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- form here -->
-                @if($errors->any())
+                {{--@if($errors->any())
                     <div class="alert alert-danger">
                         <p><strong>Opps Something went wrong</strong></p>
                         <ul>
@@ -41,7 +41,7 @@
                         @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif--}}
                 <div class="form-group d-flex justify-content-start">
                         <span class="text-left">
                             <a href="{{ route('adminLogin') }}" class="text-primary">Already Have an Account? Login Instead</a>
@@ -51,21 +51,33 @@
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputName1">Name </label>
-                        <input type="text" name="name" class="form-control" id="exampleInputName1" aria-describedby=""
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputName1" aria-describedby=""
                             placeholder="Enter your Name">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email </label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp"
                             placeholder="Enter your Email">
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="*******">
+                        <input type="password" name="password" class="form-control @error('email') is-invalid @enderror" id="exampleInputPassword1" placeholder="*******">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword14">Re-enter Password</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword14" placeholder="*******">
+                        <input type="password" name="password_confirmation" class="form-control @error('email') is-invalid @enderror" id="exampleInputPassword14" placeholder="*******">
+                            @error('password_confirmation')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                     </div>
                     <div class="form-group d-flex justify-content-end">
                         <small class="text-right">
