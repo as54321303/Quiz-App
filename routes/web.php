@@ -51,15 +51,34 @@ Route::get('/',function(){
 
 // Teacher Routes
 Route::prefix('teacher')->group(function () {
-    Route::get('dashboard',[TeacherController::class,'teacher_dashboard']);
-    Route::get('all-students',[TeacherController::class,'all_students']);
-    Route::get('student-details',[TeacherController::class,'student_details']);
-    Route::get('groups',[TeacherController::class,'groups']);
-    Route::get('group-detail',[TeacherController::class,'group_detail']);
-    Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
-    Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
-    Route::get('assign-points',[TeacherController::class,'assign_points']);
-    Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
+
+    Route::get('login', [TeacherController::class,'login'])->name('teacherLogin');
+    Route::post('login-post', [TeacherController::class,'login_post'])->name('teacherLoginPost');
+
+    Route::get('signup', [TeacherController::class,'signup'])->name('teacherSignup');
+    Route::post('signup-post', [TeacherController::class,'signup_post'])->name('teacherSignupPost');
+
+    Route::middleware(['CheckTeacherLogin'])->group(function(){
+
+                    
+                Route::get('dashboard',[TeacherController::class,'teacher_dashboard'])->name('teacher.dashboard');
+                Route::get('all-students',[TeacherController::class,'all_students']);
+                Route::get('student-details',[TeacherController::class,'student_details']);
+                Route::get('groups',[TeacherController::class,'groups']);
+                Route::get('group-detail',[TeacherController::class,'group_detail']);
+                Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
+                Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
+                Route::get('assign-points',[TeacherController::class,'assign_points']);
+                Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
+
+
+
+    });
+
+
+
+
+
 });
 
 
@@ -75,8 +94,23 @@ Route::prefix('student')->group(function () {
 
 // Parent Routes
 Route::prefix('parent')->group(function () {
-    Route::get('dashboard',[ParentController::class,'parent_dashboard']);  
-    Route::get('assign-points',[ParentController::class,'assign_points']);
-    Route::post('post-assign-points',[ParentController::class,'post_assign_points']);  
+
+    Route::get('login',[ParentController::class,'login'])->name('parent.login');
+    Route::post('login-post',[ParentController::class,'login_post'])->name('parent.login.post');
+
+    Route::get('signup',[ParentController::class,'signup'])->name('parent.signup');
+    Route::post('signup-post',[ParentController::class,'signup_post'])->name('parent.signup.post');
+
+
+    Route::middleware(['CheckParentLogin'])->group(function(){
+
+        
+            Route::get('dashboard',[ParentController::class,'parent_dashboard'])->name('parent.dashboard');  
+            Route::get('assign-points',[ParentController::class,'assign_points']);
+            Route::post('post-assign-points',[ParentController::class,'post_assign_points']);  
+
+    });
+
+
 });
 

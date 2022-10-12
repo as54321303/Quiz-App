@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-center flex-wrap" style="height: 192px;">
 
-            <a href="{{url('teacher/dashboard')}}" class="loginCard" id="card1">
+            <a href="{{route('teacherLogin')}}" class="loginCard" id="card1">
                 <div class="card m-2 d-flex text-center  align-items-center p-3" style="width: 176px; height: 192px;">
                     <h5 class="text-center text-dark">Teacher</h5>
                     <br>
@@ -58,7 +58,7 @@
                         alt="Card image cap">
                 </div>
             </a>
-            <a href="{{url('parent/dashboard')}}" class="loginCard" id="card3">
+            <a href="{{route('parent.login')}}" class="loginCard" id="card3">
                 <div class="card m-2 d-flex text-center  align-items-center p-3" style="width: 176px; height: 192px;">
                     <h5 class="text-center text-dark">Parent</h5>
                     <br>
