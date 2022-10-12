@@ -13,6 +13,9 @@ class AdminController extends Controller
 
     public function login()
     {
+        if(session()->has('adminId')) {
+            return redirect()->route('adminDashboard');
+        }
         return view('admin.login');
     }
     
