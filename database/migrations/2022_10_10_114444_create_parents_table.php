@@ -17,6 +17,7 @@ class CreateParentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('contact')->unique();
             $table->string('password');
             $table->timestamps();
         });
