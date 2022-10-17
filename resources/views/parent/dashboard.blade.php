@@ -6,6 +6,16 @@
 
 <div class="dashboard-content-one">
     <!-- Breadcubs Area Start Here -->
+
+    @if(session()->has('err_msg'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{ session()->get('err_msg') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
     <div class="breadcrumbs-area">
         <h3>Parent Dashboard</h3>
         <ul>
@@ -18,23 +28,6 @@
     <!-- Breadcubs Area End Here -->
     <!-- Dashboard summery Start Here -->
     <div class="row">
-        <!-- <div class="col-3-xxxl col-sm-6 col-12">
-            <div class="dashboard-summery-one">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="item-icon bg-light-red">
-                            <i class="flaticon-money text-red"></i>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="item-content">
-                            <div class="item-title">Due Fees</div>
-                            <div class="item-number"><span>$</span><span class="counter" data-num="4503">4,503</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="col-6-xxxl col-sm-6 col-12">
             <div class="dashboard-summery-one">
                 <div class="row">
@@ -69,24 +62,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-3-xxxl col-sm-6 col-12">
-            <div class="dashboard-summery-one">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="item-icon bg-light-blue">
-                            <i class="flaticon-money text-blue"></i>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="item-content">
-                            <div class="item-title">Expenses</div>
-                            <div class="item-number"><span>$</span><span class="counter" data-num="193000">1,93,000</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
     <!-- Dashboard summery End Here -->
     <!-- Dashboard Content Start Here -->
     <div class="row">
@@ -97,19 +72,9 @@
                         <div class="item-title">
                             <h3>My Kids</h3>
                         </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i
-                                        class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i
-                                        class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i
-                                        class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
-                        </div>
+                        <a href="{{ route('parent.addKid', ['parentId' => session()->get('parentId')]) }}">
+                            <button class="btn-primary btn btn-lg btn-outline" id="addkid">Add Kid</button>
+                        </a>
                     </div>
                     <div class="kids-details-wrap">
                         <div class="row">
@@ -282,10 +247,11 @@
        
      
     </div>
-    <footer class="footer-wrap-layout1">
-        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                href="#">PsdBosS</a></div>
-    </footer>
+        <footer class="footer-wrap-layout1">
+            <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                    href="#">PsdBosS</a></div>
+        </footer>
+
     <!-- Dashboard Content End Here -->
 </div>
     
