@@ -25,8 +25,11 @@
     <link rel="stylesheet" href="{{url('assets/parent/css/jquery.dataTables.min.css')}}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{url('assets/parent/style.css')}}">
-    <!-- Modernize js -->
-    <script src="{{url('assets/parent/js/modernizr-3.6.0.min.js')}}"></script>
+    <!-- select2 -->
+    <link rel="stylesheet" href="{{url('assets/parent/css/select2.min.css')}}">
+    <!-- datepicker -->
+    <link rel="stylesheet" href="{{url('assets/parent/css/datepicker.min.css')}}">
+
 </head>
 
 <body>
@@ -317,6 +320,8 @@
         </div>
         <!-- Page Area End Here -->
     </div>
+        <!-- Modernize js -->
+        <script src="{{url('assets/parent/js/modernizr-3.6.0.min.js')}}"></script>
     <!-- jquery-->
     <script src="{{url('assets/parent/js/jquery-3.3.1.min.js')}}"></script>
     <!-- Plugins js -->
@@ -335,6 +340,10 @@
     <script src="{{url('assets/parent/js/jquery.dataTables.min.js')}}"></script>
     <!-- Custom Js -->
     <script src="{{url('assets/parent/js/main.js')}}"></script>
+    <!--select2-->
+    <script src="{{url('assets/parent/js/select2.min.js')}}"></script>
+    <!--datepicker-->
+    <script src="{{url('assets/parent/js/datepicker.min.js')}}"></script>
 
 </body>
 
