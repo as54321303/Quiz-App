@@ -99,9 +99,6 @@ class ParentController extends Controller
 
           }
 
-
-
-
     }
 
 
@@ -179,4 +176,59 @@ class ParentController extends Controller
         session()->put('status','Points Assigned Successfully');
         return redirect('parent/dashboard');
     }
+
+    public function my_profile()
+    {
+        $parent_id=session('parentId');
+        $details=DB::table('parents')->where('id',$parent_id)->first();
+        return view('parent.my_profile',compact('details'));
+    }
+
+
+    public function update_profile(Request $request)
+    {
+        // return $request->all();
+        $parent_id=session('parentId');
+
+
+        
+        if($request->file('profile_pic')){
+	  
+            $imageName = time().'.'.$request->profile_pic->extension();
+
+            $request->profile_pic->move(public_path('uploads/profile_photos'),$imageName);
+
+            $profile_pic=url('public/uploads/profile_photos').'/'.$imageName;
+
+            }
+            else{
+                $profile_pic=null;
+            }
+
+        DB::table('parents')->where('id',$parent_id)->update([
+
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'contact'=>$request->contact,
+            'gender'=>$request->gender,
+            'profile_pic'=>$profile_pic,
+            'dob'=>$request->dob,
+            'religion'=>$request->religion,
+            'occupation'=>$request->occupation,
+            'address'=>$request->address,
+
+
+        ]);
+
+        session()->put('status','Profile Updated Successfully');
+        return redirect()->route('parent.profile');
+    }
+
+    public function logout()
+    {
+        session()->forget('parentId');
+        return redirect()->route('parent.login');
+    }
+
+
 }
