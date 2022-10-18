@@ -50,6 +50,7 @@
             </div>
             <div class="single-info-details">
                 <div class="item-img">
+                    
                     <img src="{{$details->profile_pic}}" alt="student" style="width:280px;height:330px">
                 </div>
                 <div class="item-content">

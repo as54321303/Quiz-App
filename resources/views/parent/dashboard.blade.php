@@ -7,6 +7,19 @@
 <div class="dashboard-content-one">
     <!-- Breadcubs Area Start Here -->
 
+
+
+    <div class="breadcrumbs-area">
+        <h3>Parent Dashboard</h3>
+        <ul>
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>Parents</li>
+        </ul>
+    </div>
+
+
     @if(session()->has('err_msg'))
     <div class="mb-3 alert alert-success alert-dismissible fade show" role="alert">
         {{ session()->get('err_msg') }}
@@ -19,15 +32,7 @@
         session()->forget('err_msg')
      @endphp
 
-    <div class="breadcrumbs-area">
-        <h3>Parent Dashboard</h3>
-        <ul>
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>Parents</li>
-        </ul>
-    </div>
+     
     <!-- Breadcubs Area End Here -->
     <!-- Dashboard summery Start Here -->
     <div class="row">
