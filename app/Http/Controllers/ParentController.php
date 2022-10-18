@@ -8,6 +8,10 @@ use Hash;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\ParentKids;
+use App\Models\Student;
+
+
 class ParentController extends Controller
 {
 
@@ -25,7 +29,7 @@ class ParentController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'email' =>'required|email|exists:teachers',
+            'email' =>'required|email|exists:parents',
             'password' =>'required'
         ], [
             'required' =>':attribute is required',
@@ -79,7 +83,7 @@ class ParentController extends Controller
             DB::table('parents')->insert([
                       'name'=>$request->name,
                       'email'=>$request->email,
-                      'contact'=>$request->contact,
+                    //   'contact'=>$request->contact,
                       'password'=>Hash::make($request->password),
                       'created_at'=>Carbon::now()->toDateTimeString(),
             ]);
@@ -89,7 +93,7 @@ class ParentController extends Controller
 
           } catch (\Exception $e) {
 
-              //return $e->getMessage();
+            //   return $e->getMessage();
               return redirect()->route('parent.signup')->with('errors',$e->getMessage());
 
           }
@@ -101,7 +105,69 @@ class ParentController extends Controller
     public function parent_dashboard()
     {
 
+        $parentId = session()->get('parentId');
+        // $kids = ParentKids::where('parent_id','=',$parentId)->showKids;
+        // return $kids;
         return view('parent.dashboard');
+    }
+
+    public function parent_addkid(Request $request)
+    {
+        /**
+         * if user changes query parameters in URL
+         */
+        if(session()->get('parentId') != $request->get('parentId') || !$request->parentId)  {
+            return back()->with('err_msg', 'Invalid Request');
+        }
+
+        
+
+        return view('parent.kid.add', ['parentId' => $request->parentId]);
+    }
+
+    public function parent_addkidPost(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "fullName" => "required",
+            "gender" => "required",
+            "dob" => "required",
+            "class" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            
+            $insert =  DB::table('students')->insert([
+                      'name'=>$request->fullName,
+                      'email'=>'',
+                      'password'=>'',
+                      'gender'=>$request->gender,
+                      'dateOfBirth' => $request->dob,
+                      'class' => $request->class,
+                      'bio' => $request->bio,
+                      'profilePic' => ''
+            ]);
+
+            $studentId = $insert->id;
+
+            DB::table('parentkids')->insert([
+                "parent_id" => $request->parentId,
+                "student_id" => $studentId
+            ]);
+
+            session()->put('err_msg','You have added your child to the application');
+            return redirect()->route('parent.dashboard');
+
+          } catch (\Exception $e) {
+
+            //   return $e->getMessage();
+              return redirect()->route('parent.dashboard')->with('errors',$e->getMessage());
+
+          }
+        
     }
 
     public function assign_points()

@@ -106,6 +106,9 @@ Route::prefix('parent')->group(function () {
 
         
             Route::get('dashboard',[ParentController::class,'parent_dashboard'])->name('parent.dashboard');  
+            Route::get('addkid',[ParentController::class,'parent_addkid'])->name('parent.addKid');
+            Route::post('addkidPost',[ParentController::class,'parent_addkidPost'])->name('parent.kid.post');
+
             Route::get('assign-points',[ParentController::class,'assign_points']);
             Route::post('post-assign-points',[ParentController::class,'post_assign_points']); 
             Route::get('my-profile',[ParentController::class,'my_profile'])->name('parent.profile');
