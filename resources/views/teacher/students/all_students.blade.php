@@ -23,20 +23,10 @@
             <label for="class">Select class to get students</label>
             <select name="class" class="form-control bg-white">
                 <option selected disabled>Select class</option>
-                <option value="1">I</option>
-                <option value="2">II</option>
-                <option value="3">III</option>
-                <option value="4">IV</option>
-                <option value="5">V</option>
-                <option value="6">VI</option>
-                <option value="7">VII</option>
-                <option value="8">VIII</option>
-                <option value="9">IX</option>
-                <option value="10">X</option>
-                <option value="11">XI</option>
-                <option value="12">XII</option>
-                <option value="13">XII</option>
-                <option value="14">XIV</option>
+                @foreach($className as $item)
+                <option value="{{$item->class}}">{{$item->class}}</option>
+                @endforeach
+ 
             </select>
         </div>
         <button class="bg-primary border-primary">Get Data</button>
@@ -92,8 +82,8 @@
                             {{-- <th>Photo</th> --}}
                             <th>Name</th>
                             <th>Gender</th>
-                            {{-- <th>Class</th>
-                            <th>Section</th> --}}
+                            {{-- <th>Class</th> --}}
+                            <th>Class</th>
                             <th>Date of Birth</th>
                             {{-- <th>Address</th>
                             <th>Date Of Birth</th>
@@ -117,6 +107,7 @@
                             <td>{{$details->name}}</td>
                             <td>{{$details->gender}}</td>
                             <td>{{$details->class}}</td>
+                            <td>{{$details->dateOfBirth}}</td>
                             <td>{{$details->bio}}</td>
                             {{-- <td>Jack Sparrow </td>
                             <td>TA-107 Newyork</td>

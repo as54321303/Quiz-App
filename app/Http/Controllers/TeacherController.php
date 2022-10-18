@@ -133,11 +133,19 @@ class TeacherController extends Controller
 
     public function teacher_dashboard()
     {
+ 
         return view('teacher.dashboard');
     }
 
     public function all_students(Request $request)
     {
+
+        $teacherId=session('teacherId');
+        $details=Teacher::where('id',$teacherId)->first();
+        $className=TeacherClass::where('teacherId',$teacherId)->get();
+    
+
+
         $teacherId = session('teacherId');
         if($request->has('class')){
             
@@ -148,8 +156,7 @@ class TeacherController extends Controller
 
         
      
-
-            return view('teacher.students.all_students',compact('class'));   
+ 
         
         } else {
                 // $teacherId = session('teacherId');
@@ -159,9 +166,9 @@ class TeacherController extends Controller
                 ->get();
 
 
-                return view('teacher.students.all_students',compact('class')); 
         }
 
+        return view('teacher.students.all_students',compact('class','className')); 
         
         
     }
