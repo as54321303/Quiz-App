@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\Teacher;
+use App\Models\TeacherClass;
 use Hash;
 use Validator;
 
@@ -48,6 +49,15 @@ class TeacherController extends Controller
     
         }
 
+
+        public function logout()
+        {
+            
+        session()->forget('teacherId');
+        return redirect()->route('teacherLogin');
+
+        }
+
         public function signup()
         {
 
@@ -60,12 +70,13 @@ class TeacherController extends Controller
         public function signup_post(Request $request)
         {
 
-
             // return $request->all();
             $validator = Validator::make($request->all(), [
                 "name" => "required",
                 "email" => "required|email|unique:teachers",
                 "contact" => "required|digits:10",
+                "class"=>"required",
+                "dob"=>"required",
                 "password" => "min:8|required_with:password_confirmation",
                 "password_confirmation" => "min:8|same:password"
             ]);
@@ -76,22 +87,42 @@ class TeacherController extends Controller
                 // return $validator;
             }
     
-            try {
+            // try {
                 $insert = new Teacher();
                 $insert->name = $request->name;
                 $insert->email = $request->email;
                 $insert->contact=$request->contact;
+                $insert->dob=$request->dob;
                 $insert->password = Hash::make($request->password);
                 $insert->save();
+
+                $teacherId= $insert->id;
+            
+              
+
+                for($i=0;$i<count($request->class);$i++){
+
+                   TeacherClass::insert([
+
+                    'teacherId'=>$teacherId,
+                    'class'=>$request->class[$i],
+
+                   ]);
+
+                }
+
+
                 session()->put('message','Registration Successfull');
                 return redirect()->route('teacherLogin');
     
-              } catch (\Exception $e) {
+            //  } 
+            // catch (\Exception $e) {
     
-                  //return $e->getMessage();
-                  return redirect()->route('teacherSignup')->with('errors',$e->getMessage());
+            //     // return "true";
+            //       //return $e->getMessage();
+            //       return redirect()->route('teacherSignup')->with('errors',$e->getMessage());
     
-              }
+            //   }
 
 
 
@@ -105,10 +136,32 @@ class TeacherController extends Controller
         return view('teacher.dashboard');
     }
 
-    public function all_students()
+    public function all_students(Request $request)
     {
+        $teacherId = session('teacherId');
+        if($request->has('class')){
+            
+            $class = TeacherClass::where('teacherId',$teacherId)
+            ->join('students', 'students.class','=','teacher_classes.class')
+            ->where('teacher_classes.class','=', $request->class)
+            ->get();
 
-        return view('teacher.students.all_students');   
+     
+
+            return view('teacher.students.all_students');   
+        
+        } else {
+                // $teacherId = session('teacherId');
+
+                $class = TeacherClass::where('teacherId',$teacherId)
+                ->join('students', 'students.class','=','teacher_classes.class')
+                ->get();
+
+
+                return view('teacher.students.all_students'); 
+        }
+
+        
         
     }
 

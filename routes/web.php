@@ -62,6 +62,7 @@ Route::prefix('teacher')->group(function () {
 
                     
                 Route::get('dashboard',[TeacherController::class,'teacher_dashboard'])->name('teacher.dashboard');
+                Route::get('logout',[TeacherController::class,'logout'])->name('teacher.logout');
                 Route::get('all-students',[TeacherController::class,'all_students']);
                 Route::get('student-details',[TeacherController::class,'student_details']);
                 Route::get('groups',[TeacherController::class,'groups']);

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
             /* width: 100vw;
@@ -67,6 +68,33 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="exampleInputContact1">Date of Birth </label>
+                        <input type="date" name="dob" class="form-control" id="exampleInputContact1" aria-describedby="ContactHelp"
+                            placeholder="Enter Your Date of Birth">
+                    </div>
+                    
+            
+                        <label for="select_students">Classes </label>
+                        <select name ="class[]" class="form-control form-control-sm select" id="select_students" multiple="multiple" style="width: 100%">
+                            <option value="">Please Select Class *</option>
+                            <option value="1">I</option>
+                            <option value="2">II</option>
+                            <option value="3">III</option>
+                            <option value="4">IV</option>
+                            <option value="5">V</option>
+                            <option value="6">VI</option>
+                            <option value="7">VII</option>
+                            <option value="8">VIII</option>
+                            <option value="9">IX</option>
+                            <option value="10">X</option>
+                            <option value="11">XI</option>
+                            <option value="12">XII</option>
+                            <option value="13">XII</option>
+                            <option value="14">XIV</option>
+                        </select>
+             
+
+                    <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="*******">
                     </div>
@@ -102,6 +130,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    
+      $(document).ready(function(){
+
+        $(".select").select2({
+                 placeholder:"Select classes..."
+        });
+
+      });
+</script>
+    
+
 </body>
 
 </html>

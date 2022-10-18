@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentChanges2Table extends Migration
+class CreateTeacherAddColumnTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateStudentChanges2Table extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            
-            $table->string('userId')->after('email')->nullable();
-
-
+        Schema::table('teachers', function (Blueprint $table) {
+            $table->string('dob')->after('password')->change();
         });
     }
 
@@ -28,7 +25,7 @@ class CreateStudentChanges2Table extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('teachers', function (Blueprint $table) {
             //
         });
     }

@@ -164,7 +164,7 @@ class ParentController extends Controller
             $insert =  DB::table('students')->insertGetId(array(
                       'name'=>$request->fullName,
                       'email'=>$request->email,
-                      'user_id'=>$request->userId,
+                      'userId'=>$request->userId,
                       'password'=>Hash::make($request->password),
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,

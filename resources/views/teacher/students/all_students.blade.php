@@ -17,6 +17,32 @@
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Student Table Area Start Here -->
+
+    <form action="/" method="post" class="mb-3">
+        <div class="form-group">
+            <label for="class">Select class to get students</label>
+            <select name="class" class="form-control bg-white">
+                <option selected disabled>Select class</option>
+                <option value="1">I</option>
+                <option value="2">II</option>
+                <option value="3">III</option>
+                <option value="4">IV</option>
+                <option value="5">V</option>
+                <option value="6">VI</option>
+                <option value="7">VII</option>
+                <option value="8">VIII</option>
+                <option value="9">IX</option>
+                <option value="10">X</option>
+                <option value="11">XI</option>
+                <option value="12">XII</option>
+                <option value="13">XII</option>
+                <option value="14">XIV</option>
+            </select>
+        </div>
+        <button class="bg-primary">Get Data</button>
+    
+    </form>
+    
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
