@@ -9,4 +9,11 @@ class Student extends Model
 {
     use HasFactory;
     protected $table = "students";
+
+    
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo('App\Models\Parent', 'foreign_key', 'other_key');
+    // }
+    
 }
