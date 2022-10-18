@@ -32,7 +32,6 @@
         session()->forget('err_msg')
      @endphp
 
-     
     <!-- Breadcubs Area End Here -->
     <!-- Dashboard summery Start Here -->
     <div class="row">
@@ -86,100 +85,54 @@
                     </div>
                     <div class="kids-details-wrap">
                         <div class="row">
-                            <div class="col-12-xxxl col-xl-6 col-12">
-                                <div class="kids-details-box mb-5">
-                                    <div class="item-img">
-                                        <img src="{{url('assets/parent/img/figure/student.png')}}" alt="kids">
+                            @foreach($kids as $kid)
+                                    <div class="col-12-xxxl col-xl-6 col-12">
+                                        <div class="kids-details-box mb-5">
+                                            <div class="item-img">
+                                                <img src="{{url('assets/parent/img/figure/student.png')}}" alt="kids">
+                                            </div>
+                                            
+
+                                            <div class="item-content table-responsive">
+                                                <table class="table text-nowrap">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>User ID:</td>
+                                                            <td>{{ $kid->userId }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Name:</td>
+                                                            <td>
+                                                                <a href="#">
+                                                                    {{ $kid->name }}
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Gender:</td>
+                                                            <td>{{ $kid->gender }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Class:</td>
+                                                            <td>{{ $kid->class }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td> 
+                                                                <a href="{{ route('parent.assignPoints', ['kidId' => $kid->id]) }}">
+                                                                    <button class="btn btn-success ">Assign Points</button>
+                                                                 </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="item-content table-responsive">
-                                        <table class="table text-nowrap">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Name:</td>
-                                                    <td>
-                                                        <a href="student-details.html">
-                                                            Jessia Rose
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gender:</td>
-                                                    <td>Female</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class:</td>
-                                                    <td>2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Roll:</td>
-                                                    <td>#2225</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Section:</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Admission Id:</td>
-                                                    <td>#0021</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Admission Date:</td>
-                                                    <td>07.08.2017</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12-xxxl col-xl-6 col-12">
-                                <div class="kids-details-box">
-                                    <div class="item-img">
-                                        <img src="{{url('assets/parent/img/figure/student1.png')}}" alt="kids">
-                                    </div>
-                                    <div class="item-content table-responsive">
-                                        <table class="table text-nowrap">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Name:</td>
-                                                    <td>
-                                                        <a href="student-details.html">
-                                                            Jessia Rose
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Gender:</td>
-                                                    <td>Male</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Class:</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Roll:</td>
-                                                    <td>#2205</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Section:</td>
-                                                    <td>A</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Admission Id:</td>
-                                                    <td>#0045</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Admission Date:</td>
-                                                    <td>07.08.2017</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                            
                         </div>
                     </div>
-                    <a href="{{url('parent/assign-points')}}"><button class="btn btn-primary" style="font-size:20px;">Assign Points</button></a> <br> <br>
-                    <h3 style="float-right">Total Points:50</h3>
                 </div>
                
             </div>
