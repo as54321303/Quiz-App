@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="new-added-form form" action="{{ route('parent.kid.post') }}" method="post">
+                        <form class="new-added-form form" action="{{ route('parent.kid.post') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
