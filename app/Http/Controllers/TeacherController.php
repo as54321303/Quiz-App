@@ -146,10 +146,10 @@ class TeacherController extends Controller
             ->where('teacher_classes.class','=', $request->class)
             ->get();
 
-            return $class;
+        
      
 
-            return view('teacher.students.all_students');   
+            return view('teacher.students.all_students',compact('class'));   
         
         } else {
                 // $teacherId = session('teacherId');
@@ -159,7 +159,7 @@ class TeacherController extends Controller
                 ->get();
 
 
-                return view('teacher.students.all_students'); 
+                return view('teacher.students.all_students',compact('class')); 
         }
 
         
