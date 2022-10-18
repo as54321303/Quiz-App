@@ -60,6 +60,27 @@
                                     @enderror
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Email *</label>
+                                    <input type="text" name="email" placeholder="" class="form-control">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>UserId (for child login) *</label>
+                                    <input type="text" name="userId" placeholder="" class="form-control">
+                                    @error('userId')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Password (for child login) *</label>
+                                    <input type="text" name="password" placeholder="" class="form-control">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Gender *</label>
                                     <select class="select2" name="gender">
                                         <option value="">Please Select Gender *</option>
@@ -103,15 +124,16 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
+                                    <input name="profilePic" type="file" class="form-control-file">
+                                </div>
+                                <div class="col-lg-12 col-12 form-group">
                                     <label>Short BIO</label>
                                     <textarea  class="textarea form-control" name="bio" id="form-message" cols="10"
                                         rows="9"></textarea>
                                 </div>
-                                <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                                    <input name="profilePic" type="file" class="form-control-file">
-                                </div>
+                              
                                 <input name="parentId" type="text" value="{{ $parentId }}" class="form-control" hidden>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
