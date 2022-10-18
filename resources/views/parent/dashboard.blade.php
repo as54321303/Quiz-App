@@ -8,13 +8,16 @@
     <!-- Breadcubs Area Start Here -->
 
     @if(session()->has('err_msg'))
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> {{ session()->get('err_msg') }}
+    <div class="mb-3 alert alert-success alert-dismissible fade show" role="alert">
+        {{ session()->get('err_msg') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     @endif
+     @php 
+        session()->forget('err_msg')
+     @endphp
 
     <div class="breadcrumbs-area">
         <h3>Parent Dashboard</h3>

@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\ParentKids;
 use App\Models\Student;
+use App\Models\Parents;
 
 
 class ParentController extends Controller
@@ -109,7 +110,8 @@ class ParentController extends Controller
     {
 
         $parentId = session()->get('parentId');
-        // $kids = ParentKids::where('parent_id','=',$parentId)->showKids;
+        // return $parentId;
+        // $kids = ParentKids::where('parent_id','=',$parentId)->showKids()->get();
         // return $kids;
         return view('parent.dashboard');
     }
@@ -122,8 +124,6 @@ class ParentController extends Controller
         if(session()->get('parentId') != $request->get('parentId') || !$request->parentId)  {
             return back()->with('err_msg', 'Invalid Request');
         }
-
-        
 
         return view('parent.kid.add', ['parentId' => $request->parentId]);
     }
@@ -145,28 +145,24 @@ class ParentController extends Controller
             
             $insert =  DB::table('students')->insert([
                       'name'=>$request->fullName,
-                      'email'=>'',
-                      'password'=>'',
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,
                       'class' => $request->class,
                       'bio' => $request->bio,
-                      'profilePic' => ''
             ]);
-
-            $studentId = $insert->id;
-
-            DB::table('parentkids')->insert([
+            
+            $ii =  DB::table('parentkids')->insert([
                 "parent_id" => $request->parentId,
-                "student_id" => $studentId
+                "student_id" => $insert
             ]);
+
 
             session()->put('err_msg','You have added your child to the application');
             return redirect()->route('parent.dashboard');
 
           } catch (\Exception $e) {
 
-            //   return $e->getMessage();
+              return $e->getMessage();
               return redirect()->route('parent.dashboard')->with('errors',$e->getMessage());
 
           }
