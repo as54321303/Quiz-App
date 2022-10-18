@@ -29,8 +29,10 @@
      @php 
         session()->forget('err_msg')
      @endphp
-
-    <!-- Student Table Area Start Here -->
+     <a href="{{ url()->previous() }}">
+        <button class="btn-danger btn btn-lg btn-outline mb-2" style="width: 10%">Back</button>
+     </a>
+     <!-- Student Table Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
