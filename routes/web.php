@@ -112,6 +112,10 @@ Route::prefix('parent')->group(function () {
 
             Route::get('assign-points/{kidId}',[ParentController::class,'assign_points'])->name('parent.assignPoints');
             Route::post('post-assign-points',[ParentController::class,'post_assign_points'])->name('parent.postAssignPoints'); 
+
+            Route::get('view-points/{kidId}', [ParentController::class,'viewPoints'])->name('parent.viewPoints');
+
+
             Route::get('my-profile',[ParentController::class,'my_profile'])->name('parent.profile');
             Route::post('update-profile',[ParentController::class,'update_profile'])->name('parent.update.profile');
             Route::get('change-pic/{id}',[ParentController::class,'change_profile_pic'])->name('change.profile.pic');

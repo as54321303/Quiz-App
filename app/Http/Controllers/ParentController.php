@@ -277,6 +277,13 @@ class ParentController extends Controller
         return redirect()->route('parent.profile');
     }
 
+    public function viewPoints($kidId)
+    {
+        $data = DB::table('parents_assign_points')->where('studentId', $kidId)->get();
+        // return $data;
+        return view('parent.showPoints', ['data' => $data]);
+    }
+
     public function logout()
     {
         session()->forget('parentId');
