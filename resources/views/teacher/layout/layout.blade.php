@@ -94,7 +94,7 @@
                                 <ul class="settings-list">
                                     <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
                                     <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="{{route('teacher.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>
