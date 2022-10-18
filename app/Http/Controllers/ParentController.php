@@ -127,8 +127,12 @@ class ParentController extends Controller
 
     public function parent_addkidPost(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
             "fullName" => "required",
+            "email" => "required",
+            "userId"=>"required",
+            "password"=>"required",
             "gender" => "required",
             "dob" => "required",
             "class" => "required",
@@ -138,15 +142,36 @@ class ParentController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
+
+        if($request->file('profilePic')){
+	  
+            $imageName =$request->profilePic->getClientOriginalName();
+
+            $request->profilePic->move(public_path('uploads/Students'),$imageName);
+
+            $profilePic=url('public/uploads/Students').'/'.$imageName;
+
+            }
+            else{
+                $profilePic=null;
+            }
+           
+
+
+
         try {
             
-            $insert =  DB::table('students')->insert([
+            $insert =  DB::table('students')->insertGetId(array(
                       'name'=>$request->fullName,
+                      'email'=>$request->email,
+                      'user_id'=>$request->userId,
+                      'password'=>Hash::make($request->password),
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,
                       'class' => $request->class,
                       'bio' => $request->bio,
-            ]);
+                      'profilePic'=>$profilePic
+            ));
             
             $ii =  DB::table('parentkids')->insert([
                 "parent_id" => $request->parentId,

@@ -121,3 +121,8 @@ Route::prefix('parent')->group(function () {
 
 });
 
+
+
+// parent add child:user id and password,
+
+
