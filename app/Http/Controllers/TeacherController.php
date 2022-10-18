@@ -146,6 +146,7 @@ class TeacherController extends Controller
             ->where('teacher_classes.class','=', $request->class)
             ->get();
 
+            return $class;
      
 
             return view('teacher.students.all_students');   

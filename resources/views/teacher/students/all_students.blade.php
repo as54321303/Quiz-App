@@ -18,7 +18,7 @@
     <!-- Breadcubs Area End Here -->
     <!-- Student Table Area Start Here -->
 
-    <form action="/" method="post" class="mb-3">
+    <form action="" method="get" class="mb-3">
         <div class="form-group">
             <label for="class">Select class to get students</label>
             <select name="class" class="form-control bg-white">
@@ -39,7 +39,7 @@
                 <option value="14">XIV</option>
             </select>
         </div>
-        <button class="bg-primary">Get Data</button>
+        <button class="bg-primary border-primary">Get Data</button>
     
     </form>
     
@@ -89,16 +89,16 @@
                                     <label class="form-check-label">Roll</label>
                                 </div>
                             </th>
-                            <th>Photo</th>
+                            {{-- <th>Photo</th> --}}
                             <th>Name</th>
                             <th>Gender</th>
-                            <th>Class</th>
-                            <th>Section</th>
+                            {{-- <th>Class</th>
+                            <th>Section</th> --}}
                             <th>Parents</th>
-                            <th>Address</th>
+                            {{-- <th>Address</th>
                             <th>Date Of Birth</th>
                             <th>Phone</th>
-                            <th>E-mail</th>
+                            <th>E-mail</th> --}}
                             <th>Action</th>
                             <th>Status</th>
                             <th></th>
