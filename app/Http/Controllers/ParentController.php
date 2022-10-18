@@ -108,9 +108,11 @@ class ParentController extends Controller
 
         $parentId = session()->get('parentId');
         // return $parentId;
-        // $kids = ParentKids::where('parent_id','=',$parentId)->showKids()->get();
+        $kids = ParentKids::where('parent_id','=',$parentId)
+                ->join('students', 'students.id','=','parentkids.student_id')
+                ->get(['students.id', 'name','userId','password','gender','dateOfBirth','class','bio','profilePic']);    
         // return $kids;
-        return view('parent.dashboard');
+        return view('parent.dashboard',['kids'=>$kids]);
     }
 
     public function parent_addkid(Request $request)
@@ -130,9 +132,8 @@ class ParentController extends Controller
         // return $request->all();
         $validator = Validator::make($request->all(), [
             "fullName" => "required",
-            "email" => "required",
-            "userId"=>"required",
-            "password"=>"required",
+            "userId"=>"required|unique:students",
+            "password"=>"required|min:8",
             "gender" => "required",
             "dob" => "required",
             "class" => "required",
@@ -145,11 +146,11 @@ class ParentController extends Controller
 
         if($request->file('profilePic')){
 	  
-            $imageName =$request->profilePic->getClientOriginalName();
+            $imageName = $request->profilePic->getClientOriginalName();
 
             $request->profilePic->move(public_path('uploads/Students'),$imageName);
 
-            $profilePic=url('public/uploads/Students').'/'.$imageName;
+            $profilePic = url('public/uploads/Students').'/'.$imageName;
 
             }
             else{
@@ -161,17 +162,17 @@ class ParentController extends Controller
 
         try {
             
-            $insert =  DB::table('students')->insertGetId(array(
+            $insert =  DB::table('students')->insertGetId([
                       'name'=>$request->fullName,
                       'email'=>$request->email,
-                      'userId'=>$request->userId,
+                      'user_id'=>$request->userId,
                       'password'=>Hash::make($request->password),
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,
                       'class' => $request->class,
                       'bio' => $request->bio,
                       'profilePic'=>$profilePic
-            ));
+            ]);
             
             $ii =  DB::table('parentkids')->insert([
                 "parent_id" => $request->parentId,

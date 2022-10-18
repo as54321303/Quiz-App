@@ -110,7 +110,7 @@ Route::prefix('parent')->group(function () {
             Route::get('addkid',[ParentController::class,'parent_addkid'])->name('parent.addKid');
             Route::post('addkidPost',[ParentController::class,'parent_addkidPost'])->name('parent.kid.post');
 
-            Route::get('assign-points',[ParentController::class,'assign_points']);
+            Route::get('assign-points/{kidId}',[ParentController::class,'assign_points'])->name('parent.assignPoints');
             Route::post('post-assign-points',[ParentController::class,'post_assign_points']); 
             Route::get('my-profile',[ParentController::class,'my_profile'])->name('parent.profile');
             Route::post('update-profile',[ParentController::class,'update_profile'])->name('parent.update.profile');

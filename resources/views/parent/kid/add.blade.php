@@ -60,22 +60,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Email *</label>
-                                    <input type="text" name="email" placeholder="" class="form-control">
-                                    @error('email')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>UserId (for child login) *</label>
-                                    <input type="text" name="userId" placeholder="" class="form-control">
+                                    <input type="text" name="userId" placeholder="" class="form-control" autocomplete="off">
                                     @error('userId')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Password (for child login) *</label>
-                                    <input type="text" name="password" placeholder="" class="form-control">
+                                    <input type="password" name="password" placeholder="" class="form-control" autocomplete="off">
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
