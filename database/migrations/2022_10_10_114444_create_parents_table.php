@@ -19,6 +19,13 @@ class CreateParentsTable extends Migration
             $table->string('email')->unique();
             $table->string('contact')->unique();
             $table->string('password');
+            $table->string('profile_pic')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('address')->nullable();
+
             $table->timestamps();
         });
     }

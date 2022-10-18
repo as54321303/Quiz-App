@@ -1,3 +1,14 @@
+@php
+    use Illuminate\Support\Facades\DB;
+
+    $parent_id=session('parentId');
+    $details=DB::table('parents')->where('id',$parent_id)->first();
+
+
+@endphp
+
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -70,7 +81,7 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
+                                <h5 class="item-title">{{$details->name}}</h5>
                                 <span>Parent</span>
                             </div>
                             <div class="admin-img">
@@ -79,13 +90,13 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
+                                <h6 class="item-title">{{$details->name}}</h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="{{route('parent.profile')}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                    {{-- <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li> --}}
+                                    <li><a href="{{route('parent.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -107,7 +118,7 @@
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
                         <li class="nav-item sidebar-nav-item">
-                            <a href="{{url('parent/dashboard')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
+                            <a href="{{route('parent.dashboard')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
                             <!-- <ul class="nav sub-group-menu sub-group-active">
                                 <li class="nav-item">
                                     <a href="index.html" class="nav-link"><i class="fas fa-angle-right"></i>Admin</a>
