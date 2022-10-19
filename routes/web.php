@@ -65,14 +65,15 @@ Route::prefix('teacher')->group(function () {
                 Route::get('logout',[TeacherController::class,'logout'])->name('teacher.logout');
                 Route::get('all-students',[TeacherController::class,'all_students']);
                 Route::get('student-details',[TeacherController::class,'student_details']);
-                Route::get('groups',[TeacherController::class,'groups']);
+                Route::get('groups',[TeacherController::class,'groups'])->name('teacher.listGroups');
                 Route::get('group-detail',[TeacherController::class,'group_detail']);
                 Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
                 Route::get('assign-points',[TeacherController::class,'assign_points']);
                 Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
 
-
+                Route::post('createGroup',[TeacherController::class,'createGroup'])->name('teacher.createGroup');
+                Route::get('fetchStudents/{class}',[TeacherController::class,'getStudentList']);
 
     });
 
