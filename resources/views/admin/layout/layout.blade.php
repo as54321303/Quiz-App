@@ -85,7 +85,7 @@
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    <li><a href="{{route('admin.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>

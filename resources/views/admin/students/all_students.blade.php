@@ -35,22 +35,25 @@
                                     <label class="form-check-label">Roll</label>
                                 </div>
                             </th>
-                            <th>Photo</th>
                             <th>Name</th>
                             <th>Gender</th>
                             <th>Class</th>
-                            <th>Section</th>
-                            <th>Parents</th>
+                            <th>Date of Birth</th>
+                            <th>Parent Name</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            {{-- <th>Parents</th>
                             <th>Address</th>
                             <th>Date Of Birth</th>
                             <th>Phone</th>
                             <th>E-mail</th>
                             <th>Action</th>
                             <th>Status</th>
-                            <th></th>
+                            <th></th> --}}
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($students as $details)
                         <tr>
                             <td>
                                 <div class="form-check">
@@ -58,24 +61,27 @@
                                     <label class="form-check-label">#0021</label>
                                 </div>
                             </td>
-                            <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td>
-                            <td>Mark Willy</td>
-                            <td>Male</td>
-                            <td>2</td>
-                            <td>A</td>
-                            <td>Jack Sparrow </td>
-                            <td>TA-107 Newyork</td>
+                            {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
+                            <td>{{$details->sName}}</td>
+                            <td>{{$details->gender}}</td>
+                            <td>{{$details->class}}</td>
+                            <td>{{$details->dateOfBirth}}</td>
+                            <td>{{$details->pName}}</td>
+                            <td>{{$details->address}}</td>
+                            <td>{{$details->contact}}</td>
+                            @endforeach
+                            {{-- <td>TA-107 Newyork</td>
                             <td>02/05/2001</td>
                             <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td>
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
-                            <td>
+                            <td>kazifahim93@gmail.com</td> --}}
+                            {{-- <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td> --}}
+                            {{-- <td>
                                 <div class="form-check form-switch form-check">
                                     <input class="form-check-input form-control" type="checkbox" id="">
                                     <label class="form-check-label" for="">Active</label>
                                 </div>
-                            </td>
-                            <td>
+                            </td> --}}
+                            {{-- <td>
                                 <div class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                                         aria-expanded="false">
@@ -90,52 +96,10 @@
                                                 class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                             
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
-                                </div>
-                            </td>
-                            <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td>
-                            <td>Mark Willy</td>
-                            <td>Male</td>
-                            <td>2</td>
-                            <td>A</td>
-                            <td>Jack Sparrow </td>
-                            <td>TA-107 Newyork</td>
-                            <td>02/05/2001</td>
-                            <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td>
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
-                            <td>
-                                <div class="form-check form-switch form-check">
-                                    <input class="form-check-input form-control" type="checkbox" id="">
-                                    <label class="form-check-label" for="">Active</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <span class="flaticon-more-button-of-three-dots"></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        
+                    
                     </tbody>
                 </table>
             </div>

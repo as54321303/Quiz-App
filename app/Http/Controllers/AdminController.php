@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Hash;
 use App\Models\Admin;
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use session;
 
@@ -85,6 +87,14 @@ class AdminController extends Controller
 
     }
 
+
+    public function logout()
+    {
+        session()->forget('adminId');
+
+        return redirect()->route('adminLogin');
+    }
+
     public function admin_dashboard()
     {
         return view('admin.dashboard');
@@ -92,7 +102,12 @@ class AdminController extends Controller
 
     public function all_students()
     {
-        return view('admin.students.all_students');
+        $students=Student::join('parentKids','students.id','=','parentKids.student_id')
+        ->join('parents','parents.id','=','parentKids.parent_id')->get(['students.name as sName',
+       'students.gender','students.class','students.dateOfBirth','parents.name as pName','parents.address','parents.contact']);
+        // return $students;
+
+        return view('admin.students.all_students',compact('students'));
     }
 
     public function student_details()
@@ -112,7 +127,9 @@ class AdminController extends Controller
 
     public function all_parents()
     {
-        return view('admin.parents.all_parents');
+        $parents=DB::table('parents')->get();
+        // return $parents;
+        return view('admin.parents.all_parents',compact('parents'));
     }
 
     public function parent_details()

@@ -33,33 +33,38 @@
                                     <label class="form-check-label">ID</label>
                                 </div>
                             </th>
-                            <th>Photo</th>
+                         
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Gender</th>
                             <th>Occupation</th>
                             <th>Address</th>
-                            <th>Phone</th>
-                            <th>E-mail</th>
-                            <th>Action</th>
+                            <th>Contact</th>
+                            <th>Religion</th>
+
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($parents as $parent)
+                            
+                       
                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
+                                    <label class="form-check-label">{{$parent->id}}</label>
                                 </div>
                             </td>
-                            <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td>
-                            <td>Mark Willy</td>
-                            <td>Male</td>
-                            <td>Businessman</td>
-                            <td>TA-107 Newyork</td>
-                            <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td>
-                            <td><a href="parents-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
+                            <td>{{$parent->name}}</td>
+                            <td>{{$parent->email}}</td>
+                            <td>{{$parent->gender}}</td>
+                            <td>{{$parent->occupation}}</td>
+                            <td>{{$parent->address}}</td>
+                            <td>{{$parent->contact}}</td>
+                            <td>{{$parent->religion}}</td>
+                           
+                            {{-- <td><a href="parents-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -75,9 +80,9 @@
                                                 class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
-                        
+                        @endforeach
                     </tbody>
                 </table>
             </div>
