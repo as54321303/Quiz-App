@@ -110,16 +110,16 @@
                 
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
-                            <ul class="nav sub-group-menu">
-                                <li class="nav-item">
+                            <a href="{{url('admin/all-students')}}" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                            {{-- <ul class="nav sub-group-menu"> --}}
+                                {{-- <li class="nav-item">
                                     <a href="{{url('admin/all-students')}}" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Students</a>
-                                </li>
-                                <li class="nav-item">
+                                </li> --}}
+                                {{-- <li class="nav-item">
                                     <a href="{{url('admin/student-details')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Student Details</a>
-                                </li>
+                                </li> --}}
                                 <!-- <li class="nav-item">
                                     <a href="admit-form.html" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Admission Form</a>
@@ -128,12 +128,12 @@
                                     <a href="student-promotion.html" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Student Promotion</a>
                                 </li> -->
-                            </ul>
+                            {{-- </ul> --}}
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i
+                            <a href="{{url('admin/all-teachers')}}" class="nav-link"><i
                                     class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
-                            <ul class="nav sub-group-menu">
+                            {{-- <ul class="nav sub-group-menu">
                                 <li class="nav-item">
                                     <a href="{{url('admin/all-teachers')}}" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Teachers</a>
@@ -141,7 +141,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/teacher-details')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Teacher Details</a>
-                                </li>
+                                </li> --}}
                                 <!-- <li class="nav-item">
                                     <a href="add-teacher.html" class="nav-link"><i class="fas fa-angle-right"></i>Add
                                         Teacher</a>
@@ -150,11 +150,11 @@
                                     <a href="teacher-payment.html" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Payment</a>
                                 </li> -->
-                            </ul>
+                            {{-- </ul> --}}
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-couple"></i><span>Parents</span></a>
-                            <ul class="nav sub-group-menu">
+                            <a href="{{url('admin/all-parents')}}" class="nav-link"><i class="flaticon-couple"></i><span>Parents</span></a>
+                            {{-- <ul class="nav sub-group-menu">
                                 <li class="nav-item">
                                     <a href="{{url('admin/all-parents')}}" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Parents</a>
@@ -162,12 +162,12 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/parent-deatils')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Parents Details</a>
-                                </li>
+                                </li> --}}
                                 {{-- <li class="nav-item">
                                     <a href="{{url('admin/groups')}}" class="nav-link"><i class="fas fa-angle-right"></i>
                                         Groups</a>
                                 </li> --}}
-                            </ul>
+                            {{-- </ul> --}}
                         </li>
                         
                         <li class="nav-item sidebar-nav-item">

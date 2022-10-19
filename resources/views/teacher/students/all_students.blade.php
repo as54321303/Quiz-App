@@ -90,6 +90,7 @@
                             <th>Phone</th>
                             <th>E-mail</th> --}}
                             <th>Bio</th>
+                            <th>Show</th>
                             {{-- <th>Status</th> --}}
                         
                         </tr>
@@ -113,9 +114,9 @@
                             <td>TA-107 Newyork</td>
                             <td>02/05/2001</td>
                             <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td>
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
-                         --}}
+                            <td>kazifahim93@gmail.com</td> --}}
+                            <td><a href="{{route('teacher.student.details',$details->id)}}"><button class="btn btn-primary btn-lg">Show</button></a></td>
+                         
                             @endforeach
                             {{-- <td>
                                 <div class="form-check form-switch form-check">

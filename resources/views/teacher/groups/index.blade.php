@@ -55,7 +55,7 @@
                             <th>Group Name</th>
                             <th>Class</th>
                             <th>Total Members</th>
-                            <th>Total Points</th>
+                            <th>Points</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,10 +74,14 @@
                                 {{ $rows->class }}
                             </td>
                             <td>
-                                {{ $rows->totalMembers }}
+                                {{ $rows->totalMember }}
                             </td>
                             <td>
-                                {{ $rows->totalPoints }}
+                                <a href="{{route('teacher.show.point',$rows->id)}}"><button class="btn btn-primary">Show Points</button></a>
+                            </td>
+                            <td>
+                              <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Show</button></a>
+                              <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign</button></a>
                             </td>
                         </tr>
                         @endforeach 

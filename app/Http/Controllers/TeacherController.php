@@ -176,10 +176,14 @@ class TeacherController extends Controller
         
     }
 
-    public function student_details()
+    public function student_details($id)
     {
 
-        return view('teacher.students.student_details'); 
+        $details=Student::where('students.id',$id)->join('parentkids','students.id','=','parentkids.student_id')
+        ->join('parents','parents.id','=','parentkids.parent_id')->first(['students.name as sName','students.profilePic',
+        'students.gender','students.class','students.dateOfBirth','parents.name as pName','parents.email']);
+//   return $details;
+        return view('teacher.students.student_details',compact('details')); 
 
     }
 
@@ -200,11 +204,7 @@ class TeacherController extends Controller
     public function groups()
     {
         $teacherId = session()->get('teacherId');
-        $data = Groups::where('createdByTeacherId', $teacherId)->get();
-        // return $data;
-        $data->totalMembers = '';
-        $data->totalPoints = '';
-        $data->class = '';
+        $data = Groups::where('createdByTeacherId', $teacherId)->orderBy('id','desc')->get();
 
         $class = TeacherClass::where('teacherId', $teacherId)->get();
         return view('teacher.groups.index', ['data'=>$data, 'class'=>$class]);
@@ -213,11 +213,13 @@ class TeacherController extends Controller
     public function createGroup(Request $request)
     {
         // return $request;
+        $totalMember=count($request->students);
         $teacherId = session()->get('teacherId');
         $insert = new Groups;
         $insert->createdByTeacherId = $teacherId;
         $insert->groupName = $request->group_name;
         $insert->class = $request->class;
+        $insert->totalMember = $totalMember;
         $insert->save();
 
         $groupId = $insert->id;
@@ -247,20 +249,65 @@ class TeacherController extends Controller
     }
 
 
-    public function group_detail()
+    public function group_detail($groupId)
     {
-        return view('teacher.groups.group_detail');
+        $students=DB::table('student_group')->where('student_group.groupId',$groupId)->join('students','student_group.studentId','=','students.id')->get();
+    //    return $students;
+        return view('teacher.groups.group_detail',['students'=>$students]);
     }
 
-
-    public function assign_points()
+    public function showPoint($groupId)
     {
-        return view('teacher.groups.assign_points');
+
+        $teacherId=session('teacherId');
+        $totals=0;
+        $details=DB::table('teacher_assign_points')->where('teacherId','=',$teacherId)->where('groupId','=',$groupId)->get();
+    
+        foreach($details as $item)
+        {
+            $totals=$totals+$item->point;
+        }
+ 
+        return view('teacher.groups.show_points',compact('totals','details'));
+   
+
     }
 
-    public function post_assign_points()
+    public function assign_points($groupId)
     {
-        session()->put('status','Points Assigned Successfully');
-        return redirect('teacher/groups');
+
+        $group=DB::table('groups')->where('id',$groupId)->first();
+
+        return view('teacher.groups.assign_points',compact('group'));
+    }
+
+    public function post_assign_points(Request $request)
+    {
+            $teacherId=session('teacherId');
+                $array = [
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Punctual' , 'point'=> $request->punctual],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Discipline', 'point' => $request->discipline],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Respectful', 'point' => $request->respectful],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Contributing', 'point' => $request->contributing],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Organized', 'point' => $request->organized],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Performing' , 'point'=> $request->performing],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Responsible', 'point' => $request->responsible],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Co-operative' , 'point'=> $request->coperative],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Determined' , 'point'=> $request->determined],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+       ];
+       
+       $insert = DB::table('teacher_assign_points')->insert($array);
+
+       if($insert)
+       {
+            session()->put('err_msg','Points Assigned Successfully');
+            return redirect()->route('teacher.listGroups');
+       } else {
+            session()->put('err_msg','Some error occured');
+            return redirect()->back()->withInput();
+       }
+
     }
 }

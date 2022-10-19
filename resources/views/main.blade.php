@@ -50,7 +50,7 @@
                         alt="Card image cap">
                 </div>
             </a>
-            <a href="{{url('student/dashboard')}}" class="loginCard" id="card2">
+            <a href="{{route('student.login')}}" class="loginCard" id="card2">
                 <div class="card m-2 d-flex text-center  align-items-center p-3" style="width: 176px; height: 192px;">
                     <h5 class="text-center text-dark">Kid's</h5>
                     <br>

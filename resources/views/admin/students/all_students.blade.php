@@ -40,25 +40,26 @@
                             <th>Class</th>
                             <th>Date of Birth</th>
                             <th>Parent Name</th>
-                            <th>Address</th>
-                            <th>Contact</th>
+                            {{-- <th>Address</th>
+                            <th>Contact</th> --}}
+                            <th>Action</th>
                             {{-- <th>Parents</th>
                             <th>Address</th>
                             <th>Date Of Birth</th>
                             <th>Phone</th>
                             <th>E-mail</th>
-                            <th>Action</th>
+                            
                             <th>Status</th>
                             <th></th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($students as $details)
+                        @foreach($students as $key=>$details)
                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
+                                    <label class="form-check-label">{{$key+1}}</label>
                                 </div>
                             </td>
                             {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
@@ -67,8 +68,9 @@
                             <td>{{$details->class}}</td>
                             <td>{{$details->dateOfBirth}}</td>
                             <td>{{$details->pName}}</td>
-                            <td>{{$details->address}}</td>
-                            <td>{{$details->contact}}</td>
+                            {{-- <td>{{$details->address}}</td>
+                            <td>{{$details->contact}}</td> --}}
+                            <td><a href="{{route('admin.student.details',$details->s_id)}}"><button class="btn btn-primary">Show</button></a></td>
                             @endforeach
                             {{-- <td>TA-107 Newyork</td>
                             <td>02/05/2001</td>
