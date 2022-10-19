@@ -17,7 +17,7 @@
         <h3>Groups</h3>
         <ul>
             <li>
-                <a href="{{url('teacher/dashboard')}}">Home</a>
+                <a href="{{ url('teacher/dashboard') }}">Home</a>
             </li>
             <li>Groups</li>
         </ul>
@@ -27,15 +27,15 @@
     <!-- Student Table Area Start Here -->
     <div class="card height-auto">
 
-        @if(session('status'))
+        @if(session('err_msg'))
 
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{session('status')}}
+            {{session('err_msg')}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          {{session()->flush()}}
+          {{ session()->forget('err_msg') }}
         @endif
 
         <div class="card-body">
@@ -51,129 +51,49 @@
                 <table class="table display data-table text-nowrap">
                     <thead>
                         <tr>
-                            <th>
-                                {{-- <div class="form-check"> --}}
-                                    {{-- <input type="checkbox" class="form-check-input checkAll"> --}}
-                                    <label class="form-check-label">Sr.No.</label>
-                                {{-- </div> --}}
-                            </th>
-                            {{-- <th>Photo</th> --}}
+                            <th>S.No</th>
                             <th>Group Name</th>
-                            {{-- <th>Gender</th> --}}
                             <th>Class</th>
                             <th>Total Members</th>
                             <th>Total Points</th>
-                           {{--  <th>Parents</th>
-                            <th>Address</th>
-                            <th>Date Of Birth</th>
-                            <th>Phone</th> --}}
-                            {{-- <th>E-mail</th> --}}
                             <th>Action</th>
-                            {{-- <th>Status</th> --}}
-                            <th></th>
                         </tr>
                     </thead>
+
                     <tbody>
+                        <?php $i=1; ?>
+                        @foreach($data as $rows)
                         <tr>
                             <td>
-                                {{-- <div class="form-check">
-                                    <input type="checkbox" class="form-check-input"> --}}
-                                    <label class="form-check-label">1</label>
-                                {{-- </div> --}}
+                                {{ $i }}
                             </td>
-                            {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
-                            <td>Toppers Group</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>10</td>
-                            {{-- <td>2</td>
-                            <td>A</td>
-                            <td>Jack Sparrow </td>
-                            <td>TA-107 Newyork</td>
-                            <td>02/05/2001</td>
-                            <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td> --}}
                             <td>
-                                <a href="{{url('teacher/group-detail')}}"><button class="btn btn-primary btn-lg">Show</button></a>
-                                <a href="{{url('teacher/assign-points')}}"><button class="btn btn-primary btn-lg">Assign Point</button></a>
+                                {{ $rows->groupName }}
                             </td>
-                           
-                            {{-- <td>
-                                <div class="form-check form-switch form-check">
-                                    <input class="form-check-input form-control" type="checkbox" id="">
-                                    <label class="form-check-label" for="">Active</label>
-                                </div>
-                            </td> --}}
-                            {{-- <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <span class="flaticon-more-button-of-three-dots"></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
-                                </div>
-                            </td> --}}
-                            
+                            <td>
+                                {{ $rows->class }}
+                            </td>
+                            <td>
+                                {{ $rows->totalMembers }}
+                            </td>
+                            <td>
+                                {{ $rows->totalPoints }}
+                            </td>
                         </tr>
-                        <tr>
-                            <td>
-                                {{-- <div class="form-check">
-                                    <input type="checkbox" class="form-check-input"> --}}
-                                    <label class="form-check-label">2</label>
-                                {{-- </div> --}}
-                            </td>
-                            {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
-                            <td>Backbenchers Group</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>15</td>
-                            {{-- <td>2</td> --}}
-                            {{-- <td>A</td>
-                            <td>Jack Sparrow </td>
-                            <td>TA-107 Newyork</td>
-                            <td>02/05/2001</td>
-                            <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td> --}}
-                            <td>
-
-                                <a href="{{url('teacher/group-detail')}}"><button class="btn btn-primary btn-lg">Show</button></a>
-
-                                <a href="{{url('teacher/assign-points')}}"><button class="btn btn-primary btn-lg">Assign Point</button></a>
-
-                            </td>
-                            {{-- <td>
-                                <div class="form-check form-switch form-check">
-                                    <input class="form-check-input form-control" type="checkbox" id="">
-                                    <label class="form-check-label" for="">Active</label>
-                                </div>
-                            </td> --}}
-                            {{-- <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <span class="flaticon-more-button-of-three-dots"></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
-                                </div>
-                            </td> --}}
-                            
-                        </tr>
-                        
+                        @endforeach 
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Group Name</th>
+                            <th>Class</th>
+                            <th>Total Members</th>
+                            <th>Total Points</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                   
                 </table>
             </div>
         </div>
@@ -200,51 +120,33 @@
         </div>
         <div class="modal-body">
 
-            <form>
-
+            <form action="{{ route('teacher.createGroup') }}" method="post">
+              @csrf
                 <div class="form-group">
                   <label for="group_name">Group Name</label>
-                  <input type="text" class="form-control form-control-sm mb-3" id="group_name" placeholder="Enter group name...">
+                  <input type="text" class="form-control form-control-sm mb-3" id="group_name" name="group_name" placeholder="Enter group name..." required>
                 </div>
-            <div class="form-group">
-               <label for="select_class">Select Class</label>
-            <select class="form-control mb-3" id="select_class">
-                <option>1st</option>
-                <option>2nd</option>
-                <option>3rd</option>
-                <option>4th</option>
-                <option>5th</option>
-                <option>6th</option>
-                <option>7th</option>
-                <option>8th</option>
-                <option>9th</option>
-                <option>10th</option>
-                <option>11th</option>
-                <option>12th</option>
-              </select>
-            </div>
+                <div class="form-group">
+                  <label for="select_class">Select Class</label>
+
+                  <select name="class" class="form-control mb-3" id="select_class" onchange="return fetchStudentsList()" required>
+                        <option value="">Select Class</option>
+                        @foreach($class as $classes)
+                            <option value="{{ $classes->class }}">{{ $classes->class }}</option>
+                        @endforeach
+                  </select>
+                </div>
 
 
 
               <label for="select_students">Select Students</label>
-            <select class="form-control form-control-sm select" id="select_students" multiple="multiple" style="width: 100%">
-                <option>Ayush</option>
-                <option>Asutosh</option>
-                <option>Amanda</option>
-                <option>Harry</option>
-                <option>George</option>
-                <option>Brack</option>
-                <option>Donny</option>
-                <option>Mike</option>
-                <option>Hemsowrth</option>
-                <option>Robert</option>
-                <option>Scarlet</option>
-                <option>Jennifer</option>
-              </select>
+                <select name="students[]" class="form-control form-control-sm select" id="select_students" multiple="multiple" style="width: 100%" required>
+                  
+                </select>
 
       
             <div class="form-group">
-              <button type="button" class="btn btn-primary mt-3">Create</button>
+              <button type="submit" class="btn btn-primary mt-3">Create</button>
             </div>
             </form>
         </div>

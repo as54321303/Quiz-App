@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ParentKids;
 use App\Models\Student;
 use App\Models\Parents;
+use App\Models\Groups;
 
 
 class ParentController extends Controller
@@ -165,7 +166,7 @@ class ParentController extends Controller
             $insert =  DB::table('students')->insertGetId([
                       'name'=>$request->fullName,
                       'email'=>$request->email,
-                      'user_id'=>$request->userId,
+                      'userId'=>$request->userId,
                       'password'=>Hash::make($request->password),
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,
@@ -192,13 +193,41 @@ class ParentController extends Controller
         
     }
 
-    public function assign_points()
+    public function assign_points($kidId)
     {
-        return view('parent.assign_points');
+        return view('parent.assign_points', ['kidId' => $kidId]);
     }
 
-    public function post_assign_points()
+    public function post_assign_points(Request $request)
     {
+       
+
+        $array = [
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Punctual' , 'point'=> $request->punctual],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Discipline', 'point' => $request->discipline],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Respectful', 'point' => $request->respectful],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Contributing', 'point' => $request->contributing],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Organized', 'point' => $request->organized],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Performing' , 'point'=> $request->performing],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Responsible', 'point' => $request->responsible],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Co-operative' , 'point'=> $request->coperative],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Determined' , 'point'=> $request->determined],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+       ];
+       
+       $insert = DB::table('parents_assign_points')->insert($array);
+
+       if($insert)
+       {
+            session()->put('err_msg','Points Assigned Successfully');
+            return redirect()->route('parent.dashboard');
+       } else {
+            session()->put('err_msg','Some error occured');
+            return redirect()->back()->withInput();
+       }
+
+
         session()->put('status','Points Assigned Successfully');
         return redirect('parent/dashboard');
     }
@@ -249,6 +278,15 @@ class ParentController extends Controller
         session()->put('status','Profile Updated Successfully');
         return redirect()->route('parent.profile');
     }
+
+    public function viewPoints($kidId)
+    {
+        $data = DB::table('parents_assign_points')->where('studentId', $kidId)->get();
+        // return $data;
+        return view('parent.showPoints', ['data' => $data]);
+    }
+
+
 
     public function logout()
     {

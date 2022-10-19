@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeacherAddColumnTable extends Migration
+class UpdateGroupListTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateTeacherAddColumnTable extends Migration
      */
     public function up()
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->string('dob')->after('password');
+        Schema::table('groups', function (Blueprint $table) {
+            $table->string('class')->after('groupName');
         });
     }
 
@@ -25,8 +25,6 @@ class CreateTeacherAddColumnTable extends Migration
      */
     public function down()
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            //
-        });
+        
     }
 }

@@ -73,14 +73,15 @@ Route::prefix('teacher')->group(function () {
                 Route::get('logout',[TeacherController::class,'logout'])->name('teacher.logout');
                 Route::get('all-students',[TeacherController::class,'all_students']);
                 Route::get('student-details',[TeacherController::class,'student_details']);
-                Route::get('groups',[TeacherController::class,'groups']);
+                Route::get('groups',[TeacherController::class,'groups'])->name('teacher.listGroups');
                 Route::get('group-detail',[TeacherController::class,'group_detail']);
                 Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
                 Route::get('assign-points',[TeacherController::class,'assign_points']);
                 Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
 
-
+                Route::post('createGroup',[TeacherController::class,'createGroup'])->name('teacher.createGroup');
+                Route::get('fetchStudents/{class}',[TeacherController::class,'getStudentList']);
 
     });
 
@@ -104,6 +105,7 @@ Route::prefix('student')->group(function () {
 // Parent Routes
 Route::prefix('parent')->group(function () {
 
+
     Route::get('login',[ParentController::class,'login'])->name('parent.login');
     Route::post('login-post',[ParentController::class,'login_post'])->name('parent.login.post');
 
@@ -119,7 +121,11 @@ Route::prefix('parent')->group(function () {
             Route::post('addkidPost',[ParentController::class,'parent_addkidPost'])->name('parent.kid.post');
 
             Route::get('assign-points/{kidId}',[ParentController::class,'assign_points'])->name('parent.assignPoints');
-            Route::post('post-assign-points',[ParentController::class,'post_assign_points']); 
+            Route::post('post-assign-points',[ParentController::class,'post_assign_points'])->name('parent.postAssignPoints'); 
+
+            Route::get('view-points/{kidId}', [ParentController::class,'viewPoints'])->name('parent.viewPoints');
+
+
             Route::get('my-profile',[ParentController::class,'my_profile'])->name('parent.profile');
             Route::post('update-profile',[ParentController::class,'update_profile'])->name('parent.update.profile');
             Route::get('change-pic/{id}',[ParentController::class,'change_profile_pic'])->name('change.profile.pic');

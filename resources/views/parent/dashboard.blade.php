@@ -117,7 +117,12 @@
                                                             <td>{{ $kid->class }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td></td>
+                                                            <td>
+                                                                <a href="{{ route('parent.viewPoints', ['kidId' => $kid->id]) }}">
+                                                                    <button class="btn btn-success ">View Points</button>
+                                                                 </a>
+
+                                                            </td>
                                                             <td> 
                                                                 <a href="{{ route('parent.assignPoints', ['kidId' => $kid->id]) }}">
                                                                     <button class="btn btn-success ">Assign Points</button>
