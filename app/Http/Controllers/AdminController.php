@@ -152,3 +152,4 @@ class AdminController extends Controller
         return view('admin.groups.index');
     }
 }
+
