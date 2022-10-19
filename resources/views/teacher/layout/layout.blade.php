@@ -182,6 +182,27 @@
 
     @yield('scripts')
 
+    <script>
+        function fetchStudentsList()
+            {
+                let classValue = document.getElementById('select_class').value;
+                //let teacherId = document.getElementById('teacherId').value
+                // console.log(classId);
+                // console.log(teacherId);
+                // return;
+                // let tt = '{{ url("teacher/fetchStudents") }}/' + classValue
+                // console.log(tt);
+                // return;
+                $.ajax({
+                    type:'GET',
+                    url:'{{ url("teacher/fetchStudents") }}/' + classValue,
+                    success:function(data) {
+                        $("#select_students").html(data);
+                    }
+                    });
+            }
+    </script>
+
 </body>
 
 </html>

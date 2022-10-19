@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use Session;
 use App\Models\Teacher;
 use App\Models\TeacherClass;
+use App\Models\Groups;
+use App\Models\Student;
 use Hash;
 use Validator;
+use DB;
 
 class TeacherController extends Controller
 {
@@ -186,10 +189,54 @@ class TeacherController extends Controller
         return view('teacher.quiz.quiz_grades'); 
 
     }
-
+    
     public function groups()
     {
-        return view('teacher.groups.index');
+        $teacherId = session()->get('teacherId');
+        $data = Groups::where('createdByTeacherId', $teacherId)->get();
+        // return $data;
+        $data->totalMembers = '';
+        $data->totalPoints = '';
+        $data->class = '';
+
+        $class = TeacherClass::where('teacherId', $teacherId)->get();
+        return view('teacher.groups.index', ['data'=>$data, 'class'=>$class]);
+    }
+
+    public function createGroup(Request $request)
+    {
+        // return $request;
+        $teacherId = session()->get('teacherId');
+        $insert = new Groups;
+        $insert->createdByTeacherId = $teacherId;
+        $insert->groupName = $request->group_name;
+        $insert->class = $request->class;
+        $insert->save();
+
+        $groupId = $insert->id;
+        for($i = 0; $i< count($request->students); $i++){
+            DB::table('student_group')->insert([
+                "groupId" => $groupId,
+                "studentId" => $request->students[$i]
+            ]);
+        }
+        session()->put('err_msg', 'Group Added Successfully');
+        return redirect()->route('teacher.listGroups');
+
+        
+    }
+
+    /**
+     * for fetching students in class ajax call
+     */
+    public function getStudentList($class)
+    {
+        $data = Student::where('class', $class)->get();
+        $option = '';
+        foreach($data as $rows){
+            $option .= "<option value='$rows->id'>$rows->name</option>";
+        }
+        return $option;
     }
 
 

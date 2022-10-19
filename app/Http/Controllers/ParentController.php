@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ParentKids;
 use App\Models\Student;
 use App\Models\Parents;
+use App\Models\Groups;
 
 
 class ParentController extends Controller
@@ -165,7 +166,7 @@ class ParentController extends Controller
             $insert =  DB::table('students')->insertGetId([
                       'name'=>$request->fullName,
                       'email'=>$request->email,
-                      'user_id'=>$request->userId,
+                      'userId'=>$request->userId,
                       'password'=>Hash::make($request->password),
                       'gender'=>$request->gender,
                       'dateOfBirth' => $request->dob,
@@ -284,6 +285,8 @@ class ParentController extends Controller
         // return $data;
         return view('parent.showPoints', ['data' => $data]);
     }
+
+
 
     public function logout()
     {
