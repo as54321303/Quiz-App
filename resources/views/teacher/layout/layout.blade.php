@@ -131,9 +131,9 @@
                                 <li class="nav-item">
                                     <a href="{{url('teacher/all-students')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{url('teacher/student-details')}}" class="nav-link"><i class="fas fa-angle-right"></i>Student Details</a>
-                                </li>
+                                </li> --}}
               
                             </ul>
                         </li>

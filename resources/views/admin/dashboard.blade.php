@@ -46,7 +46,7 @@
                     <div class="col-6">
                         <div class="item-content">
                             <div class="item-title">Teachers</div>
-                            <div class="item-number"><span class="counter" data-num="2250">2,250</span></div>
+                            <div class="item-number"><span class="counter" data-num="2250">{{$totalTeachers}}</span></div>
                         </div>
                     </div>
                 </div>

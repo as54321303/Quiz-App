@@ -39,6 +39,7 @@
                             <th>Group Name</th>
                             {{-- <th>Gender</th> --}}
                             <th>Class</th>
+                            <th>Total Members</th>
                             <th>Created By</th>
                            {{--  <th>Parents</th>
                             <th>Address</th>
@@ -51,17 +52,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($details as $key=>$item)
+                            
+                        
                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">1</label>
+                                    <label class="form-check-label">{{$key+1}}</label>
                                 </div>
                             </td>
                             {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
-                            <td>Toppers Group</td>
-                            <td>10</td>
-                            <td>William</td>
+                            <td>{{$item->groupName}}</td>
+                            <td>{{$item->class}}</td>
+                            <td>{{$item->totalMember}}</td>
+                            <td>{{$item->teacherName}}</td>
                             {{-- <td>2</td>
                             <td>A</td>
                             <td>Jack Sparrow </td>
@@ -69,7 +74,7 @@
                             <td>02/05/2001</td>
                             <td>+ 123 9988568</td>
                             <td>kazifahim93@gmail.com</td> --}}
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
+                            <td><a href="{{route('admin.show.group.details',$item->id)}}"><button class="btn btn-primary btn-lg">Show</button></a></td>
                             {{-- <td>
                                 <div class="form-check form-switch form-check">
                                     <input class="form-check-input form-control" type="checkbox" id="">
@@ -94,49 +99,7 @@
                             </td> --}}
                             
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">2</label>
-                                </div>
-                            </td>
-                            {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
-                            <td>Backbenchers Group</td>
-                            <td>10</td>
-                            <td>Michael</td>
-                            {{-- <td>2</td> --}}
-                            {{-- <td>A</td>
-                            <td>Jack Sparrow </td>
-                            <td>TA-107 Newyork</td>
-                            <td>02/05/2001</td>
-                            <td>+ 123 9988568</td>
-                            <td>kazifahim93@gmail.com</td> --}}
-                            <td><a href="student-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
-                            {{-- <td>
-                                <div class="form-check form-switch form-check">
-                                    <input class="form-check-input form-control" type="checkbox" id="">
-                                    <label class="form-check-label" for="">Active</label>
-                                </div>
-                            </td> --}}
-                            {{-- <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <span class="flaticon-more-button-of-three-dots"></span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
-                                </div>
-                            </td> --}}
-                            
-                        </tr>
+                        @endforeach
                         
                     </tbody>
                 </table>

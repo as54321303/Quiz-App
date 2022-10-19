@@ -35,30 +35,37 @@
                                     <label class="form-check-label">ID</label>
                                 </div>
                             </th>
-                            <th>Photo</th>
+                            {{-- <th>Photo</th> --}}
                             <th>Name</th>
-                            <th>Gender</th>
-                            <th>Class</th>
-                            <th>Subject</th>
-                            <th>Section</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Date of Birth</th>
+                            {{-- <th>Section</th>
                             <th>Address</th>
                             <th>Phone</th>
                             <th>E-mail</th>
                             <th>Action/th>
-                            <th></th>
+                            <th></th> --}}
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($details as $key=>$item)
+                            
+                       
+
                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
+                                    <label class="form-check-label">{{$key+1}}</label>
                                 </div>
                             </td>
-                            <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td>
-                            <td>Mark Willy</td>
-                            <td>Male</td>
+                            {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->contact}}</td>
+                            <td>{{$item->dob}}</td>
+                            {{-- <td>Male</td>
                             <td>2</td>
                             <td>English</td>
                             <td>A</td>
@@ -77,9 +84,9 @@
                                         <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
-                        
+                        @endforeach
                     </tbody>
                 </table>
             </div>

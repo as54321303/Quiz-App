@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeStudentColumnName extends Migration
+class CreateGroupsChangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeStudentColumnName extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->renameColumn('user_id', 'userId')->nullable(false);
+        Schema::table('groups', function (Blueprint $table) {
+            $table->string('totalMember')->after('class');
         });
     }
 
@@ -25,6 +25,8 @@ class ChangeStudentColumnName extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('groups', function (Blueprint $table) {
+            //
+        });
     }
 }
