@@ -83,8 +83,6 @@ class AdminController extends Controller
 
           }
         
-
-
     }
 
 
@@ -105,7 +103,7 @@ class AdminController extends Controller
         $students=Student::join('parentKids','students.id','=','parentKids.student_id')
         ->join('parents','parents.id','=','parentKids.parent_id')->get(['students.name as sName',
        'students.gender','students.class','students.dateOfBirth','parents.name as pName','parents.address','parents.contact']);
-        // return $students;
+      
 
         return view('admin.students.all_students',compact('students'));
     }
@@ -151,5 +149,7 @@ class AdminController extends Controller
     {
         return view('admin.groups.index');
     }
+
+
 }
 
