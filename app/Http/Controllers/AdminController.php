@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Hash;
 use App\Models\Admin;
 use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\Groups;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use session;
@@ -83,8 +85,6 @@ class AdminController extends Controller
 
           }
         
-
-
     }
 
 
@@ -97,27 +97,38 @@ class AdminController extends Controller
 
     public function admin_dashboard()
     {
-        return view('admin.dashboard');
+        $totalStudents=Student::all();
+        $totalTeachers=count(Teacher::all());
+
+        return view('admin.dashboard',compact('totalStudents','totalTeachers'));
     }
 
     public function all_students()
     {
-        $students=Student::join('parentKids','students.id','=','parentKids.student_id')
-        ->join('parents','parents.id','=','parentKids.parent_id')->get(['students.name as sName',
-       'students.gender','students.class','students.dateOfBirth','parents.name as pName','parents.address','parents.contact']);
-        // return $students;
-
+        $students=Student::join('parentkids','students.id','=','parentkids.student_id')
+        ->join('parents','parents.id','=','parentkids.parent_id')->orderBy('students.id','desc')->get(['students.name as sName',
+       'students.gender','students.class','students.dateOfBirth','parents.name as pName','students.id as s_id','students.profilePic']);
+      
+// return $students;
         return view('admin.students.all_students',compact('students'));
     }
 
-    public function student_details()
+    public function student_details($studentId)
     {
-        return view('admin.students.student_details');
+
+        $details=Student::where('students.id',$studentId)->join('parentkids','students.id','=','parentkids.student_id')
+        ->join('parents','parents.id','=','parentkids.parent_id')->first(['students.name as sName',
+        'students.gender','students.class','students.dateOfBirth','parents.name as pName','students.id',
+        'students.profilePic','parents.email as pEmail','students.userId']);
+// return $details;
+        return view('admin.students.student_details',compact('details'));
     }
 
     public function all_teachers()
     {
-        return view('admin.teachers.all_teachers');
+        $details=Teacher::orderBy('id','desc')->get();
+
+        return view('admin.teachers.all_teachers',compact('details'));
     }
 
     public function teacher_details()
@@ -149,6 +160,22 @@ class AdminController extends Controller
 
     public function groups()
     {
-        return view('admin.groups.index');
+      
+        $details = Groups::join('teachers','groups.createdByTeacherId','=','teachers.id')->orderBy('groups.id','desc')->get([
+            'groups.id','groups.groupName','groups.class','groups.totalMember','teachers.name as teacherName'
+        ]);
+                // return $details;
+        return view('admin.groups.index',compact('details'));
     }
+
+
+    public function groupDetails($groupId)
+    {
+        $students=DB::table('student_group')->where('student_group.groupId',$groupId)->join('students','student_group.studentId','=','students.id')->get();
+        $groupName=Groups::where('id',$groupId)->first('groupName');
+
+        return view('admin.groups.groupDetails',compact('students','groupName'));
+    }
+
 }
+

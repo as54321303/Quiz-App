@@ -89,7 +89,7 @@
                                     <div class="col-12-xxxl col-xl-6 col-12">
                                         <div class="kids-details-box mb-5">
                                             <div class="item-img">
-                                                <img src="{{url('assets/parent/img/figure/student.png')}}" alt="kids">
+                                                <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
                                             </div>
                                             
 

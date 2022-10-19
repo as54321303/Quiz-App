@@ -1,4 +1,4 @@
-@extends('teacher.layout.layout')
+@extends('admin.layout.layout')
 
 @section('title','Teacher-Assign Points')
     
@@ -10,7 +10,7 @@
         <h3>Group Detail</h3>
         <ul>
             <li>
-                <a href="{{url('teacher/dashboard')}}">Home</a>
+                <a href="{{route('adminDashboard')}}">Home</a>
             </li>
             <li>Group Detail</li>
         </ul>
@@ -21,7 +21,7 @@
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
-                <h3>Group Detail</h3>
+                <h3>Group Name : ({{$groupName->groupName}})</h3>
                 <div class="item-title">                 
                 </div>
             </div>
@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th>Sr.No.</th>
+                            <th>Profile Pic</th>
                             <th>User Id</th>
                             <th>Student Name</th>
                         </tr>
@@ -41,6 +42,9 @@
                       
                         <tr>
                             <td>{{$key+1}}</td>
+                            <td>
+                                <img src="{{$item->profilePic}}" alt="Unavailable" style="height:100px;width:100px;">
+                            </td>
                             <td>{{$item->userId}}</td>
                             <td>{{$item->name}}</td>
                            

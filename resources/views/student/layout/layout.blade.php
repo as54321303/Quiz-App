@@ -1,3 +1,13 @@
+@php
+    use App\Models\Student;
+
+    $studentId=session('studentId');
+    $details=Student::where('id',$studentId)->first();
+
+
+@endphp
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -73,22 +83,22 @@
                         <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             <div class="admin-title">
-                                <h5 class="item-title">Stevne Zone</h5>
+                                <h5 class="item-title">{{$details->name}}</h5>
                                 <span>Student</span>
                             </div>
                             <div class="admin-img">
-                                <img src="{{url('assets/student/img/figure/admin.jpg')}}" alt="Admin">
+                                <img src="{{$details->profilePic}}" alt="Student" style="width:40px;height:40px;">
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="item-header">
-                                <h6 class="item-title">Steven Zone</h6>
+                                <h6 class="item-title">{{$details->name}}</h6>
                             </div>
                             <div class="item-content">
                                 <ul class="settings-list">
-                                    <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li>
-                                    <li><a href="login.html"><i class="flaticon-turn-off"></i>Log Out</a></li>
+                                    {{-- <li><a href="#"><i class="flaticon-user"></i>My Profile</a></li> --}}
+                                    {{-- <li><a href="#"><i class="flaticon-gear-loading"></i>Account Settings</a></li> --}}
+                                    <li><a href="{{route('student.logout')}}"><i class="flaticon-turn-off"></i>Log Out</a></li>
                                 </ul>
                             </div>
                         </div>

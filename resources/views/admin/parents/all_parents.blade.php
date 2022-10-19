@@ -36,11 +36,11 @@
                          
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Gender</th>
+                            {{-- <th>Gender</th>
                             <th>Occupation</th>
                             <th>Address</th>
                             <th>Contact</th>
-                            <th>Religion</th>
+                            <th>Religion</th> --}}
 
                             <th></th>
                         </tr>
@@ -58,11 +58,11 @@
                             </td>
                             <td>{{$parent->name}}</td>
                             <td>{{$parent->email}}</td>
-                            <td>{{$parent->gender}}</td>
+                            {{-- <td>{{$parent->gender}}</td>
                             <td>{{$parent->occupation}}</td>
                             <td>{{$parent->address}}</td>
                             <td>{{$parent->contact}}</td>
-                            <td>{{$parent->religion}}</td>
+                            <td>{{$parent->religion}}</td> --}}
                            
                             {{-- <td><a href="parents-details.html"><button class="btn btn-primary btn-lg">Show</button></a></td>
                             <td>

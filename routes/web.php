@@ -40,13 +40,14 @@ Route::get('/',function(){
             Route::get('logout',[AdminController::class,'logout'])->name('admin.logout');
             Route::get('dashboard', [AdminController::class,'admin_dashboard'])->name('adminDashboard');
             Route::get('all-students',[AdminController::class,'all_students']);
-            Route::get('student-details',[AdminController::class,'student_details']);
+            Route::get('student-details/{studentId}',[AdminController::class,'student_details'])->name('admin.student.details');
             Route::get('all-teachers',[AdminController::class,'all_teachers']);
             Route::get('teacher-details',[AdminController::class,'teacher_details']);
             Route::get('all-parents',[AdminController::class,'all_parents']);
             Route::get('parent-deatils',[AdminController::class,'parent_details']);
             Route::get('parent-deatils',[AdminController::class,'parent_details']);
             Route::get('groups',[AdminController::class,'groups']);
+            Route::get('group-details/{groupId}',[AdminController::class,'groupDetails'])->name('admin.show.group.details');
             Route::get('quiz-schedule',[AdminController::class,'quiz_schedule']);
             Route::get('quiz-grades',[AdminController::class,'quiz_grades']);
 
@@ -72,12 +73,13 @@ Route::prefix('teacher')->group(function () {
                 Route::get('dashboard',[TeacherController::class,'teacher_dashboard'])->name('teacher.dashboard');
                 Route::get('logout',[TeacherController::class,'logout'])->name('teacher.logout');
                 Route::get('all-students',[TeacherController::class,'all_students']);
-                Route::get('student-details',[TeacherController::class,'student_details']);
+                Route::get('student-details/{id}',[TeacherController::class,'student_details'])->name('teacher.student.details');
                 Route::get('groups',[TeacherController::class,'groups'])->name('teacher.listGroups');
-                Route::get('group-detail',[TeacherController::class,'group_detail']);
+                Route::get('group-detail/{groupId}',[TeacherController::class,'group_detail'])->name('teacher.group.show');
+                Route::get('show-point/{groupId}',[TeacherController::class,'showPoint'])->name('teacher.show.point');
                 Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
-                Route::get('assign-points',[TeacherController::class,'assign_points']);
+                Route::get('assign-points/{groupId}',[TeacherController::class,'assign_points'])->name('teacher.assign.points');
                 Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
 
                 Route::post('createGroup',[TeacherController::class,'createGroup'])->name('teacher.createGroup');
@@ -95,10 +97,20 @@ Route::prefix('teacher')->group(function () {
 
 // Student Routes
 Route::prefix('student')->group(function () {
-    Route::get('dashboard',[StudentController::class,'student_dashboard']);
-    Route::get('quiz-schedule',[StudentController::class,'quiz_schedule']);
-    Route::get('quiz-grades',[StudentController::class,'quiz_grades']);
-    Route::get('notice',[StudentController::class,'notice']);
+    Route::get('login',[StudentController::class,'login'])->name('student.login');
+    Route::post('post-login',[StudentController::class,'postLogin'])->name('student.postLogin');
+
+    Route::middleware(['CheckStudentLogin'])->group(function(){
+
+        Route::get('logout',[StudentController::class,'logout'])->name('student.logout');
+        Route::get('dashboard',[StudentController::class,'studentDashboard'])->name('student.dashboard');
+        Route::get('quiz-schedule',[StudentController::class,'quiz_schedule'])->name('student.quiz.schedule');
+        Route::get('quiz-grades',[StudentController::class,'quiz_grades'])->name('student.quiz.grades');
+        Route::get('notice',[StudentController::class,'notice'])->name('student.notice');
+
+    });
+
+
 });
 
 
