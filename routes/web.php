@@ -32,20 +32,28 @@ Route::get('/',function(){
         Route::get('login', [AdminController::class,'login'])->name('adminLogin');
         Route::post('login_post', [AdminController::class,'login_post'])->name('adminLoginPost');
 
+
         Route::get('signup', [AdminController::class,'signup'])->name('adminSignup');
         Route::post('signup-post', [AdminController::class,'signup_post'])->name('adminSignupPost');
         
-        Route::get('dashboard', [AdminController::class,'admin_dashboard'])->name('adminDashboard')->middleware('CheckAdminLogin');
-        Route::get('all-students',[AdminController::class,'all_students']);
-        Route::get('student-details',[AdminController::class,'student_details']);
-        Route::get('all-teachers',[AdminController::class,'all_teachers']);
-        Route::get('teacher-details',[AdminController::class,'teacher_details']);
-        Route::get('all-parents',[AdminController::class,'all_parents']);
-        Route::get('parent-deatils',[AdminController::class,'parent_details']);
-        Route::get('parent-deatils',[AdminController::class,'parent_details']);
-        Route::get('groups',[AdminController::class,'groups']);
-        Route::get('quiz-schedule',[AdminController::class,'quiz_schedule']);
-        Route::get('quiz-grades',[AdminController::class,'quiz_grades']);
+        Route::middleware(['CheckAdminLogin'])->group(function(){
+            Route::get('logout',[AdminController::class,'logout'])->name('admin.logout');
+            Route::get('dashboard', [AdminController::class,'admin_dashboard'])->name('adminDashboard');
+            Route::get('all-students',[AdminController::class,'all_students']);
+            Route::get('student-details',[AdminController::class,'student_details']);
+            Route::get('all-teachers',[AdminController::class,'all_teachers']);
+            Route::get('teacher-details',[AdminController::class,'teacher_details']);
+            Route::get('all-parents',[AdminController::class,'all_parents']);
+            Route::get('parent-deatils',[AdminController::class,'parent_details']);
+            Route::get('parent-deatils',[AdminController::class,'parent_details']);
+            Route::get('groups',[AdminController::class,'groups']);
+            Route::get('quiz-schedule',[AdminController::class,'quiz_schedule']);
+            Route::get('quiz-grades',[AdminController::class,'quiz_grades']);
+
+
+        });
+
+
     });
 
 
