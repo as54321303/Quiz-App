@@ -240,9 +240,28 @@ class TeacherController extends Controller
      */
     public function getStudentList($class)
     {
-        $data = Student::where('class', $class)->get();
+
+        $notAssignedStudents=array();
+        $students=Student::where('class',$class)->get();
+
+        foreach($students as $check){
+
+           $check2= DB::table('student_group')->where('studentId',$check->id)->get()->count();
+
+            if(!$check2)
+            {
+
+                    $studentData= Student::where('class','=',$class)->where('id',$check->id)->first();
+
+                    array_push($notAssignedStudents,$studentData);
+
+            }
+
+        }
+
+
         $option = '';
-        foreach($data as $rows){
+        foreach($notAssignedStudents as $rows){
             $option .= "<option value='$rows->id'>$rows->name</option>";
         }
         return $option;
@@ -255,6 +274,49 @@ class TeacherController extends Controller
     //    return $students;
         return view('teacher.groups.group_detail',['students'=>$students]);
     }
+
+
+    public function remove_group_member($sId)
+    {
+
+        DB::table('student_group')->where('studentId',$sId)->delete();
+        return back()->with('status','Group Member Deleted');
+    }
+
+    public function add_group_member(Request $request)
+    {
+        $groupId= $request->groupId;
+
+
+        for($i = 0; $i< count($request->students); $i++){
+            DB::table('student_group')->insert([
+                "groupId" => $groupId,
+                "studentId" => $request->students[$i]
+            ]);
+        }
+
+        return redirect()->back()->with('status','Member Added Successfully!');
+
+
+    }
+
+
+    public function studentFeedback(Request $request)
+    {
+
+
+        $teacherId=session('teacherId');
+        DB::table('teacher_feedbacks')->insert([
+            'teacherId'=>$teacherId,
+            'studentId'=>$request->studentId,
+            'title'=>$request->title,
+            'description'=>$request->description,
+        ]);
+
+        return redirect()->back()->with('status','Feedback sent successfully!');
+
+    }
+
 
     public function showPoint($groupId)
     {
@@ -270,7 +332,6 @@ class TeacherController extends Controller
  
         return view('teacher.groups.show_points',compact('totals','details'));
    
-
     }
 
     public function assign_points($groupId)

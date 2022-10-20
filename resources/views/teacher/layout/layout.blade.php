@@ -190,6 +190,7 @@
     @yield('scripts')
 
     <script>
+
         function fetchStudentsList()
             {
                 let classValue = document.getElementById('select_class').value;
@@ -208,6 +209,7 @@
                     }
                     });
             }
+            
     </script>
 
 </body>

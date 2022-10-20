@@ -76,7 +76,10 @@ Route::prefix('teacher')->group(function () {
                 Route::get('student-details/{id}',[TeacherController::class,'student_details'])->name('teacher.student.details');
                 Route::get('groups',[TeacherController::class,'groups'])->name('teacher.listGroups');
                 Route::get('group-detail/{groupId}',[TeacherController::class,'group_detail'])->name('teacher.group.show');
+                Route::get('remove-group-member/{sId}',[TeacherController::class,'remove_group_member'])->name('teacher.remove.group.member');
+                Route::post('add-group-member',[TeacherController::class,'add_group_member'])->name('teacher.add.group.member');
                 Route::get('show-point/{groupId}',[TeacherController::class,'showPoint'])->name('teacher.show.point');
+                Route::post('student-feedback',[TeacherController::class,'studentFeedback'])->name('teacher.student.feedback');
                 Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
                 Route::get('assign-points/{groupId}',[TeacherController::class,'assign_points'])->name('teacher.assign.points');
