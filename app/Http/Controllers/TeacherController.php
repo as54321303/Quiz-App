@@ -357,6 +357,7 @@ class TeacherController extends Controller
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Determined' , 'point'=> $request->determined],
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Obedient' , 'point'=> $request->obedient],
        ];
        
        $insert = DB::table('teacher_assign_points')->insert($array);

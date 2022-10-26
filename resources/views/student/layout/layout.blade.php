@@ -123,6 +123,16 @@
                             <a href="{{url('student/dashboard')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
    
                         </li>
+
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="{{route('student.group')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>My Group</span></a>
+   
+                        </li>
+
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="{{route('student.feedback')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Feedbacks</span></a>
+   
+                        </li>
              
 
                         <li class="nav-item sidebar-nav-item">
@@ -138,9 +148,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{url('student/notice')}}" class="nav-link"><i
-                                    class="flaticon-script"></i><span>Notice</span></a>
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="{{url('student/notice')}}" class="nav-link"><i class="flaticon-script"></i><span>Notice</span></a>
                         </li>
 
                     </ul>

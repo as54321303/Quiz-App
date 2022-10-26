@@ -106,6 +106,8 @@ Route::prefix('student')->group(function () {
     Route::middleware(['CheckStudentLogin'])->group(function(){
 
         Route::get('logout',[StudentController::class,'logout'])->name('student.logout');
+        Route::get('my-group',[StudentController::class,'myGroup'])->name('student.group');
+        Route::get('feedback',[StudentController::class,'feedback'])->name('student.feedback');
         Route::get('dashboard',[StudentController::class,'studentDashboard'])->name('student.dashboard');
         Route::get('quiz-schedule',[StudentController::class,'quiz_schedule'])->name('student.quiz.schedule');
         Route::get('quiz-grades',[StudentController::class,'quiz_grades'])->name('student.quiz.grades');
