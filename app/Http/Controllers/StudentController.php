@@ -81,15 +81,26 @@ class StudentController extends Controller
         return view('student.group.index',compact('groupDetails','totalPoints'));
     }
 
+    public function groupPoints($groupId)
+    {
+        $points=DB::table('teacher_assign_points')->where('groupId',$groupId)->get();
+
+        return view('student.group.groupPoints',compact('points'));
+    }
+
 
     public function feedback()
     {
+        
         $studentId=session('studentId');
         $teacherFeedback=DB::table('teacher_feedbacks')->where('studentId',$studentId)->join('teachers','teacher_feedbacks.teacherId','=','teachers.id')
         ->orderBy('teacher_feedbacks.id','desc')->get(['teacher_feedbacks.title','teacher_feedbacks.description','teacher_feedbacks.created_at','teachers.name']);
-        // ->join('parentkids','teacher_feedbacks.studentId','=','parentkids.student_id')
-        // ->join('parents','parentkids.parent_id','=','parents.id')->get();
-        return view('student.feedback.index',compact('teacherFeedback'));
+       
+        $parentFeedback=DB::table('parent_feedbacks')->where('studentId',$studentId)->join('parentkids','parent_feedbacks.studentId','=','parentkids.student_id')
+        ->orderBy('parent_feedbacks.id','desc')->get(['parent_feedbacks.title','parent_feedbacks.description','parent_feedbacks.created_at']);
+       
+
+        return view('student.feedback.index',compact('teacherFeedback','parentFeedback'));
 
     }
     
@@ -105,6 +116,20 @@ class StudentController extends Controller
     public function notice()
     {
         return view('student.notice.notice');
+    }
+
+    public function assignments()
+
+    {
+        $studentId=session('studentId');
+        $group=DB::table('student_group')->where('studentId',$studentId)->first();
+
+
+        $assignments=DB::table('group_projects')->where('groupId',$group->groupId)
+        ->join('teachers','group_projects.teacherId','=','teachers.id')->get();
+
+        return view('student.assignment.index',compact('assignments'));
+
     }
 
 }

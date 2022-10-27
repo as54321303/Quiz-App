@@ -205,7 +205,8 @@ class TeacherController extends Controller
     {
         $teacherId = session()->get('teacherId');
         $data = Groups::where('createdByTeacherId', $teacherId)->orderBy('id','desc')->get();
-
+//         $totalPoints=Groups::where('createdByTeacherId', $teacherId)->join('teacher_assign_points','groups.id','=','teacher_assign_points.groupId')->get();
+// return $totalPoints;
         $class = TeacherClass::where('teacherId', $teacherId)->get();
         return view('teacher.groups.index', ['data'=>$data, 'class'=>$class]);
     }
@@ -372,4 +373,32 @@ class TeacherController extends Controller
        }
 
     }
+
+    public function assignAssignment(Request $request)
+    {
+        // return $request->all();
+
+        $teacherId=session('teacherId');
+        DB::table('group_projects')->insert([
+
+            'teacherId'=>$teacherId,
+            'groupId'=>$request->groupId,
+            'subject'=>$request->subject,
+            'assignment'=>$request->assignment,
+            'created_at'=>\Carbon\Carbon::now()->toDateTimeString(),
+
+        ]);
+
+
+        return redirect()->back()->with('status','Assignment assigned successfully');
+    }
+
+
+    public function viewAssignment($groupId)
+    {
+        $teacherId=session('teacherId');
+        $assignments=DB::table('group_projects')->where('teacherId',$teacherId)->where('groupId',$groupId)->get();
+        return view('teacher.groups.viewAssignments',['assignments'=>$assignments]);
+    }
+
 }

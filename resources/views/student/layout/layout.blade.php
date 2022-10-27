@@ -130,6 +130,11 @@
                         </li>
 
                         <li class="nav-item sidebar-nav-item">
+                            <a href="{{route('student.assignments')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Assignments</span></a>
+   
+                        </li>
+
+                        <li class="nav-item sidebar-nav-item">
                             <a href="{{route('student.feedback')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Feedbacks</span></a>
    
                         </li>

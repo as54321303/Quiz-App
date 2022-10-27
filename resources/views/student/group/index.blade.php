@@ -39,7 +39,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <h3>Group Name : ({{$groupDetails[0]->groupName}})</h3>
-            <h3 class="float-right">Total Points: ({{$totalPoints}})</h3>
+            <h3 class="float-right">Total Points: <a href="{{route('student.group.points',$groupDetails[0]->groupId)}}"> ({{$totalPoints}}) </a></h3>
             </div>
 
 

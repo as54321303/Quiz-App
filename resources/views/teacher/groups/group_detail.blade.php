@@ -23,7 +23,7 @@
     </div>
 
 
-@if (\Session::has('status'))
+    @if (\Session::has('status'))
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {!! \Session::get('status') !!}
@@ -39,7 +39,8 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <h3>Group Detail</h3>
-                <div class="item-title float-right">    
+                <div class="item-title float-right"> 
+                   <a href="{{route('teacher.view.assignment',$students[0]->groupId)}}"> <button class="btn btn-primary">Assignments</button> </a>  
                     <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#addMember">
                        Add Member
                       </button> 

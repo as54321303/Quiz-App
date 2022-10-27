@@ -294,4 +294,37 @@ class ParentController extends Controller
     }
 
 
+    public function feedback(Request $request)
+    {
+// return $request->all();
+        $parentId=session('parentId');
+        
+           DB::table('parent_feedbacks')->insert([
+
+                 'parentId'=>$parentId,
+                 'studentId'=>$request->studentId,
+                 'title'=>$request->title,
+                 'description'=>$request->description,
+                 'created_at'=>\Carbon\Carbon::now()->toDateTimeString(),
+                //  'updated_at'=>\Carbon\Carbon::now()->toDateTimeString(),
+
+           ]);
+
+           return redirect()->back()->with('status','Feedback sent Successfully');
+
+    }
+
+
+    public function teacherFeedback()
+    {
+
+        $parentId=session('parentId');
+        $feedbacks=DB::table('parentkids')->where('parentkids.parent_id',$parentId)->join('teacher_feedbacks','parentkids.student_id','teacher_feedbacks.studentId')
+        ->join('teachers','teacher_feedbacks.teacherId','=','teachers.id')->join('students','teacher_feedbacks.studentId','=','students.id')->orderBy('teacher_feedbacks.id','desc')
+        ->get(['teachers.name as teacherName','students.name as studentName','students.profilePic','teacher_feedbacks.title','teacher_feedbacks.description','teacher_feedbacks.created_at']);
+
+        return view('parent.feedback.index',compact('feedbacks'));
+    }
+
+
 }

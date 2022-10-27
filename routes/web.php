@@ -41,7 +41,7 @@ Route::get('/',function(){
             Route::get('dashboard', [AdminController::class,'admin_dashboard'])->name('adminDashboard');
             Route::get('all-students',[AdminController::class,'all_students']);
             Route::get('student-details/{studentId}',[AdminController::class,'student_details'])->name('admin.student.details');
-            Route::get('all-teachers',[AdminController::class,'all_teachers']);
+            Route::get('all-teachers',[AdminController::class,'all_teachers'])->name('admin.all.teachers');
             Route::get('teacher-details',[AdminController::class,'teacher_details']);
             Route::get('all-parents',[AdminController::class,'all_parents']);
             Route::get('parent-deatils',[AdminController::class,'parent_details']);
@@ -50,7 +50,9 @@ Route::get('/',function(){
             Route::get('group-details/{groupId}',[AdminController::class,'groupDetails'])->name('admin.show.group.details');
             Route::get('quiz-schedule',[AdminController::class,'quiz_schedule']);
             Route::get('quiz-grades',[AdminController::class,'quiz_grades']);
-
+            Route::get('notification',[AdminController::class,'notification']);
+            Route::get('add-teacher',[AdminController::class,'addTeacher'])->name('admin.add.teacher');
+            Route::post('post-add-teacher',[AdminController::class,'postAddTeacher'])->name('admin.post.add.teacher');
 
         });
 
@@ -84,6 +86,8 @@ Route::prefix('teacher')->group(function () {
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
                 Route::get('assign-points/{groupId}',[TeacherController::class,'assign_points'])->name('teacher.assign.points');
                 Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
+                Route::post('assign-assignment',[TeacherController::class,'assignAssignment'])->name('teacher.assign.assignment');
+                Route::get('view-assignment/{groupId}',[TeacherController::class,'viewAssignment'])->name('teacher.view.assignment');
 
                 Route::post('createGroup',[TeacherController::class,'createGroup'])->name('teacher.createGroup');
                 Route::get('fetchStudents/{class}',[TeacherController::class,'getStudentList']);
@@ -107,12 +111,13 @@ Route::prefix('student')->group(function () {
 
         Route::get('logout',[StudentController::class,'logout'])->name('student.logout');
         Route::get('my-group',[StudentController::class,'myGroup'])->name('student.group');
+        Route::get('group-points/{groupId}',[StudentController::class,'groupPoints'])->name('student.group.points');
         Route::get('feedback',[StudentController::class,'feedback'])->name('student.feedback');
         Route::get('dashboard',[StudentController::class,'studentDashboard'])->name('student.dashboard');
         Route::get('quiz-schedule',[StudentController::class,'quiz_schedule'])->name('student.quiz.schedule');
         Route::get('quiz-grades',[StudentController::class,'quiz_grades'])->name('student.quiz.grades');
         Route::get('notice',[StudentController::class,'notice'])->name('student.notice');
-
+        Route::get('assignents',[StudentController::class,'assignments'])->name('student.assignments');
     });
 
 
@@ -142,6 +147,9 @@ Route::prefix('parent')->group(function () {
 
             Route::get('view-points/{kidId}', [ParentController::class,'viewPoints'])->name('parent.viewPoints');
 
+            Route::post('parent-feedback',[ParentController::class,'feedback'])->name('parent.student.feedback');
+
+            Route::get('teacher-feedback',[ParentController::class,'teacherFeedback'])->name('parent.teacher.feedback');
 
             Route::get('my-profile',[ParentController::class,'my_profile'])->name('parent.profile');
             Route::post('update-profile',[ParentController::class,'update_profile'])->name('parent.update.profile');
