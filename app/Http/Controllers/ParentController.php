@@ -213,6 +213,7 @@ class ParentController extends Controller
             ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
             ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Determined' , 'point'=> $request->determined],
             ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+            ['studentId' => $request->studentId ,'parentId' => $request->parentId ,'reason'=>'Obedient' , 'point'=> $request->obedient],
        ];
        
        $insert = DB::table('parents_assign_points')->insert($array);

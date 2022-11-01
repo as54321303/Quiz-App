@@ -117,7 +117,7 @@ Route::prefix('student')->group(function () {
         Route::get('quiz-schedule',[StudentController::class,'quiz_schedule'])->name('student.quiz.schedule');
         Route::get('quiz-grades',[StudentController::class,'quiz_grades'])->name('student.quiz.grades');
         Route::get('notice',[StudentController::class,'notice'])->name('student.notice');
-        Route::get('assignents',[StudentController::class,'assignments'])->name('student.assignments');
+        Route::get('assignments',[StudentController::class,'assignments'])->name('student.assignments');
     });
 
 

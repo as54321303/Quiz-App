@@ -122,6 +122,7 @@ class StudentController extends Controller
 
     {
         $studentId=session('studentId');
+       
         $group=DB::table('student_group')->where('studentId',$studentId)->first();
 
 

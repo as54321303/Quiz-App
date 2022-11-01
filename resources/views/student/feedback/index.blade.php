@@ -1,6 +1,6 @@
 @extends('student.layout.layout')
 
-@section('title','Student-Notice')
+@section('title','Student::Feedbacks')
     
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('student.layout.layout')
 
-@section('title','Teacher-Assign Points')
+@section('title','Student::Group Points')
 
 @section('styles')
 
