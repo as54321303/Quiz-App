@@ -11,6 +11,7 @@ use App\Models\Student;
 use Hash;
 use Validator;
 use DB;
+use Carbon\Carbon;
 
 class TeacherController extends Controller
 {
@@ -136,8 +137,33 @@ class TeacherController extends Controller
 
     public function teacher_dashboard()
     {
- 
-        return view('teacher.dashboard');
+        $teacherId = session()->get('teacherId');
+        $classes = TeacherClass::where('teacherId', $teacherId)->get();
+        $studentCount = 0;
+        $male = 0;
+        $female = 0;
+        $others = 0;
+
+        foreach($classes as $class) {
+            $s = Student::where('class', $class->class)->count();
+            $studentCount += $s;
+            
+            $gender = Student::where('class', $class->class)->get();
+            foreach($gender as $gen)
+            {
+                if($gen->gender == 'Male')
+                {
+                    $male++;
+                } else if ($gen->gender == 'Female')
+                {
+                    $female++;
+                } else {
+                    $others++;
+                }
+            }
+            
+        }
+        return view('teacher.dashboard', ['studentCount' => $studentCount, 'male' => $male, 'female' => $female, 'others' => $others]);
     }
 
     public function all_students(Request $request)
@@ -153,9 +179,9 @@ class TeacherController extends Controller
         if($request->has('class')){
             
             $class = TeacherClass::where('teacherId',$teacherId)
-            ->join('students', 'students.class','=','teacher_classes.class')
-            ->where('teacher_classes.class','=', $request->class)
-            ->get();
+                    ->join('students', 'students.class','=','teacher_classes.class')
+                    ->where('teacher_classes.class','=', $request->class)
+                    ->get();
 
         
      
@@ -272,10 +298,40 @@ class TeacherController extends Controller
     public function group_detail($groupId)
     {
         $students=DB::table('student_group')->where('student_group.groupId',$groupId)->join('students','student_group.studentId','=','students.id')->get();
-    //    return $students;
         return view('teacher.groups.group_detail',['students'=>$students]);
     }
 
+    public function group_student_detail($groupId)
+    {
+        $students=DB::table('student_group')->where('student_group.groupId',$groupId)->join('students','student_group.studentId','=','students.id')->get();
+        // return $students;
+        return view('teacher.groups.groupStudents', ['students'=> $students, 'groupId'=>$groupId]);
+    }
+
+    public function assignment($groupId)
+    {
+        $teacherId = session()->get('teacherId');
+        $assignments = DB::table('group_projects')
+                    ->where('teacherId', $teacherId)
+                    ->where('groupId', $groupId)
+                    ->get();
+        // return $assignments;
+        foreach($assignments as $assign){
+            $date = Carbon::parse($assign->created_at, 'UTC');
+            $day = $date->isoFormat('D');
+            $weekday = $date->isoFormat('dddd');
+            $month = $date->isoFormat('MMM');
+            $fullDate = $date->isoFormat('MMM Do YYYY');
+            $assign->day = $day;
+            $assign->weekday = $weekday;
+            $assign->month = $month;
+            $assign->fullDate = $fullDate;
+        }
+
+        // return $assignments;
+
+        return view('teacher.groups.assignmentList', ['assignment'=>$assignments, 'groupId' => $groupId ]);                     
+    }
 
     public function remove_group_member($sId)
     {
@@ -335,30 +391,30 @@ class TeacherController extends Controller
    
     }
 
-    public function assign_points($groupId)
+    public function assign_points($groupId, $studentId)
     {
-
-        $group=DB::table('groups')->where('id',$groupId)->first();
-
-        return view('teacher.groups.assign_points',compact('group'));
+        $group = DB::table('groups')->where('id',$groupId)->first();
+        $student = Student::find($studentId);
+        // return $student;
+        return view('teacher.groups.assign_points', ['group'=>$group, 'student' => $student]);
     }
 
     public function post_assign_points(Request $request)
     {
-            $teacherId=session('teacherId');
-                $array = [
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Punctual' , 'point'=> $request->punctual],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Discipline', 'point' => $request->discipline],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Respectful', 'point' => $request->respectful],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Contributing', 'point' => $request->contributing],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Organized', 'point' => $request->organized],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Performing' , 'point'=> $request->performing],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Responsible', 'point' => $request->responsible],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Co-operative' , 'point'=> $request->coperative],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Determined' , 'point'=> $request->determined],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
-            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Obedient' , 'point'=> $request->obedient],
+        $teacherId = session('teacherId');
+        $array = [
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Punctual' , 'point'=> $request->punctual],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Discipline', 'point' => $request->discipline],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Respectful', 'point' => $request->respectful],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Contributing', 'point' => $request->contributing],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Organized', 'point' => $request->organized],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Performing' , 'point'=> $request->performing],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Responsible', 'point' => $request->responsible],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Co-operative' , 'point'=> $request->coperative],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Determined' , 'point'=> $request->determined],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+            ['studentId' => $request->studentId ,'teacherId' => $teacherId ,'reason'=>'Obedient' , 'point'=> $request->obedient],
        ];
        
        $insert = DB::table('teacher_assign_points')->insert($array);
@@ -366,7 +422,8 @@ class TeacherController extends Controller
        if($insert)
        {
             session()->put('err_msg','Points Assigned Successfully');
-            return redirect()->route('teacher.listGroups');
+            // return redirect()->route('teacher.listGroups');
+            return redirect()->route('teacher.group.students', ['groupId' => $request->groupId]);
        } else {
             session()->put('err_msg','Some error occured');
             return redirect()->back()->withInput();
@@ -380,13 +437,11 @@ class TeacherController extends Controller
 
         $teacherId=session('teacherId');
         DB::table('group_projects')->insert([
-
             'teacherId'=>$teacherId,
             'groupId'=>$request->groupId,
             'subject'=>$request->subject,
             'assignment'=>$request->assignment,
             'created_at'=>\Carbon\Carbon::now()->toDateTimeString(),
-
         ]);
 
 

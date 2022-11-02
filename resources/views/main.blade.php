@@ -20,7 +20,7 @@
 <body class="">
     <div class="row pt-3 mb-3">
         <div class="col-3 ml-auto d-flex text-dark">
-            <a href="./About.html" class="text-dark mx-1">About Us</a>
+            <a href="{{ url('/') }}" class="text-dark mx-1">About Us</a>
             <a href="#" class="text-dark mx-1" class="mx-2">Terms and Condition</a>
         </div>
     </div>

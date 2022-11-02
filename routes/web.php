@@ -21,10 +21,16 @@ use App\Http\Controllers\ParentController;
 // Starter Route
 
 Route::get('/',function(){
-          return view('main');
+          return view('About');
 });
 
+Route::get('/contact-us',function(){
+          return view('contact');
+});
 
+Route::get('/main',function(){
+    return view('main');
+});
 
 // Admin Routes
 
@@ -78,14 +84,17 @@ Route::prefix('teacher')->group(function () {
                 Route::get('student-details/{id}',[TeacherController::class,'student_details'])->name('teacher.student.details');
                 Route::get('groups',[TeacherController::class,'groups'])->name('teacher.listGroups');
                 Route::get('group-detail/{groupId}',[TeacherController::class,'group_detail'])->name('teacher.group.show');
+                Route::get('group-detail/students/{groupId}',[TeacherController::class,'group_student_detail'])->name('teacher.group.students');
+                
                 Route::get('remove-group-member/{sId}',[TeacherController::class,'remove_group_member'])->name('teacher.remove.group.member');
                 Route::post('add-group-member',[TeacherController::class,'add_group_member'])->name('teacher.add.group.member');
                 Route::get('show-point/{groupId}',[TeacherController::class,'showPoint'])->name('teacher.show.point');
                 Route::post('student-feedback',[TeacherController::class,'studentFeedback'])->name('teacher.student.feedback');
                 Route::get('quiz-schedule',[TeacherController::class,'quiz_schedule']);
                 Route::get('quiz-grades',[TeacherController::class,'quiz_grades']);
-                Route::get('assign-points/{groupId}',[TeacherController::class,'assign_points'])->name('teacher.assign.points');
+                Route::get('assign-points/group/{groupId}/student/{studentId}',[TeacherController::class,'assign_points'])->name('teacher.assign.points');
                 Route::post('post-assign-points',[TeacherController::class,'post_assign_points']);
+                Route::get('assignment/{groupId}',[TeacherController::class,'assignment'])->name('teacher.assignment');
                 Route::post('assign-assignment',[TeacherController::class,'assignAssignment'])->name('teacher.assign.assignment');
                 Route::get('view-assignment/{groupId}',[TeacherController::class,'viewAssignment'])->name('teacher.view.assignment');
 

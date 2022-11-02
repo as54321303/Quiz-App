@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{url('assets/teacher/css/jquery.dataTables.min.css')}}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{url('assets/teacher/style.css')}}">
+    <!-- css for cards in assignment -->
+    <link rel="stylesheet" href="{{url('assets/teacher/css/cards.css')}}">
+    
     <!-- Modernize js -->
     @yield('styles')
     <script src="{{url('assets/teacher/js/modernizr-3.6.0.min.js')}}"></script>
