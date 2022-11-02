@@ -21,7 +21,9 @@
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
+                
                 <h3>Group Name : ({{$groupName->groupName}})</h3>
+                <h3 class="float-right">Total Points: ({{$totalPoints}})</h3>
                 <div class="item-title">                 
                 </div>
             </div>
@@ -34,6 +36,7 @@
                             <th>Profile Pic</th>
                             <th>User Id</th>
                             <th>Student Name</th>
+                            <th>Class</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +50,7 @@
                             </td>
                             <td>{{$item->userId}}</td>
                             <td>{{$item->name}}</td>
+                            <td>{{$item->class}}</td>
                            
                         </tr>
                         @endforeach

@@ -35,8 +35,8 @@
     <!-- Breadcubs Area End Here -->
     <!-- Dashboard summery Start Here -->
     <div class="row">
-        <div class="col-6-xxxl col-sm-6 col-12">
-            <div class="dashboard-summery-one">
+        {{-- <div class="col-6-xxxl col-sm-6 col-12"> --}}
+            {{-- <div class="dashboard-summery-one">
                 <div class="row">
                     <div class="col-6">
                         <div class="item-icon bg-light-magenta">
@@ -68,11 +68,27 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     <!-- Dashboard summery End Here -->
     <!-- Dashboard Content Start Here -->
+
     <div class="row">
+
+
         <div class="col-5-xxxl col-12">
+
+            @if (\Session::has('status'))
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!! \Session::get('status') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        
+              @endif
+              
+
             <div class="card dashboard-card-twelve">
                 <div class="card-body">
                     <div class="heading-layout1">
@@ -87,13 +103,28 @@
                         <div class="row">
                             @foreach($kids as $kid)
                                     <div class="col-12-xxxl col-xl-6 col-12">
+                                       
                                         <div class="kids-details-box mb-5">
-                                            <div class="item-img">
-                                                <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
-                                            </div>
                                             
+                                            <div class="item-img">
+                                                @if($kid->profilePic==NULL)
+
+                                                <img src="{{url('public/dummyImages/image1.jpg')}}" alt="kids" style="height:98px;width:98px;">
+
+
+                                                @else 
+
+                                                <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
+                                          @endif
+                                            </div>
+                                          
 
                                             <div class="item-content table-responsive">
+
+                                                {{-- Feedback Button --}}
+
+                                                <button type="button"  class="btn btn-danger float-right" data-toggle="modal" data-target="#feedback{{$kid->id}}">Feedback</button>                                                
+                                                
                                                 <table class="table text-nowrap">
                                                     <tbody>
                                                         <tr>
@@ -129,11 +160,52 @@
                                                                  </a>
                                                             </td>
                                                         </tr>
+                    
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+                                    
+                            <div class="modal fade" id="feedback{{$kid->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Feedback To my child</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                            
+                                        <form action="{{ route('parent.student.feedback') }}" method="post">
+                                          @csrf
+                            
+                                          <input type="hidden" value="{{$kid->id}}" name="studentId">
+                            
+                                          <label for="title">Title</label>
+
+                                              <input type="text" class="form-control mb-3" name="title" id="title" required>
+                            
+                                              <label for="description">Describe</label>
+
+                                            <textarea class="form-control" name="description" id="description" cols="30" rows="8" placeholder="Describe your feedback..." required></textarea>
+                                  
+                                        <div class="form-group">
+                                          <button type="submit" class="btn btn-primary mt-3">Send</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                            
+                                  </div>
+                                </div>
+                              </div>
+
+
                             @endforeach
                             
                         </div>
@@ -142,6 +214,10 @@
                
             </div>
         </div>
+
+
+
+        
         <div class="col-xl-12 col-7-xxxl col-12">
             <div class="card dashboard-card-six">
                 <div class="card-body">

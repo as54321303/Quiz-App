@@ -126,16 +126,16 @@
                     
                         </li>
                         <li class="nav-item sidebar-nav-item">
-                            <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
-                            <ul class="nav sub-group-menu">
+                            <a href="{{url('teacher/all-students')}}" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                            {{-- <ul class="nav sub-group-menu">
                                 <li class="nav-item">
                                     <a href="{{url('teacher/all-students')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Students</a>
                                 </li>
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{url('teacher/student-details')}}" class="nav-link"><i class="fas fa-angle-right"></i>Student Details</a>
-                                </li> --}}
+                                </li>
               
-                            </ul>
+                            </ul> --}}
                         </li>
 
                         <li class="nav-item sidebar-nav-item">
@@ -190,6 +190,7 @@
     @yield('scripts')
 
     <script>
+
         function fetchStudentsList()
             {
                 let classValue = document.getElementById('select_class').value;
@@ -208,6 +209,7 @@
                     }
                     });
             }
+            
     </script>
 
 </body>
