@@ -67,7 +67,7 @@
                             <th>Group Name</th>
                             <th>Class</th>
                             <th>Assignment</th>
-                            <th>Points</th>
+                            <th class="text-center">Points</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -90,12 +90,13 @@
                                 Assign
                               </button> 
                             </td>
-                            <td>
+                            <td  class="text-center">
                                 <a href="{{route('teacher.show.point',$rows->id)}}"><button class="btn btn-primary">Show Points</button></a>
+                                <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign Points</button></a>
                             </td>
                             <td>
-                              <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Show</button></a>
-                              <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign</button></a>
+                              <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Group Details</button></a>
+                              
                             </td>
                         </tr>
                         @php

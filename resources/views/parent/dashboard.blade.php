@@ -35,8 +35,8 @@
     <!-- Breadcubs Area End Here -->
     <!-- Dashboard summery Start Here -->
     <div class="row">
-        <div class="col-6-xxxl col-sm-6 col-12">
-            <div class="dashboard-summery-one">
+        {{-- <div class="col-6-xxxl col-sm-6 col-12"> --}}
+            {{-- <div class="dashboard-summery-one">
                 <div class="row">
                     <div class="col-6">
                         <div class="item-icon bg-light-magenta">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     <!-- Dashboard summery End Here -->
     <!-- Dashboard Content Start Here -->
 
@@ -107,7 +107,15 @@
                                         <div class="kids-details-box mb-5">
                                             
                                             <div class="item-img">
+                                                @if($kid->profilePic==NULL)
+
+                                                <img src="{{url('public/dummyImages/image1.jpg')}}" alt="kids" style="height:98px;width:98px;">
+
+
+                                                @else 
+
                                                 <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
+                                          @endif
                                             </div>
                                           
 
