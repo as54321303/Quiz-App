@@ -39,7 +39,7 @@
                             <th>Group Name</th>
                             {{-- <th>Gender</th> --}}
                             <th>Class</th>
-                            <th>Total Members</th>
+
                             <th>Created By</th>
                            {{--  <th>Parents</th>
                             <th>Address</th>
@@ -65,7 +65,7 @@
                             {{-- <td class="text-center"><img src="{{url('assets/admin/img/figure/student2.png')}}" alt="student"></td> --}}
                             <td>{{$item->groupName}}</td>
                             <td>{{$item->class}}</td>
-                            <td>{{$item->totalMember}}</td>
+                        
                             <td>{{$item->teacherName}}</td>
                             {{-- <td>2</td>
                             <td>A</td>

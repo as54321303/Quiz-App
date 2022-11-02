@@ -15,13 +15,28 @@
             <li>All Teachers</li>
         </ul>
     </div>
+
+    @if (\Session::has('status'))
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {!! \Session::get('status') !!}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      @endif
+      
     <!-- Breadcubs Area End Here -->
     <!-- Teacher Table Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
+                <h3 class="float-left">All Teachers Data</h3>
                 <div class="item-title">
-                    <h3>All Teachers Data</h3>
+                    <a href="{{route('admin.add.teacher')}}" class="float-right"><button class="btn btn-primary">Add Teacher</button></a>
+
+                    
                 </div>
             </div>
             

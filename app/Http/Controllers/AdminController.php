@@ -7,6 +7,7 @@ use Hash;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\TeacherClass;
 use App\Models\Groups;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -162,7 +163,7 @@ class AdminController extends Controller
     {
       
         $details = Groups::join('teachers','groups.createdByTeacherId','=','teachers.id')->orderBy('groups.id','desc')->get([
-            'groups.id','groups.groupName','groups.class','groups.totalMember','teachers.name as teacherName'
+            'groups.id','groups.groupName','groups.class','teachers.name as teacherName'
         ]);
                 // return $details;
         return view('admin.groups.index',compact('details'));
@@ -174,7 +175,88 @@ class AdminController extends Controller
         $students=DB::table('student_group')->where('student_group.groupId',$groupId)->join('students','student_group.studentId','=','students.id')->get();
         $groupName=Groups::where('id',$groupId)->first('groupName');
 
-        return view('admin.groups.groupDetails',compact('students','groupName'));
+        $totalPoints=DB::table('teacher_assign_points')->where('groupId',$groupId)->sum('point');
+
+        return view('admin.groups.groupDetails',compact('students','groupName','totalPoints'));
+    }
+
+
+    public function addTeacher()
+    {
+        return view('admin.teachers.addTeacher');
+    }
+
+    public function postAddTeacher(Request $request)
+    {
+        // return $request->all();
+        $validator = Validator::make($request->all(), [
+            "name" => "required",
+            "email" => "required|email|unique:teachers",
+            "contact" => "required|digits:10",
+            "class"=>"required",
+            "dob"=>"required",
+            "password" => "min:8|required_with:password_confirmation",
+            "password_confirmation" => "min:8|same:password"
+        ]);
+
+        // return $validator;
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+            // return $validator;
+        }
+
+
+            $insert = new Teacher();
+            $insert->name = $request->name;
+            $insert->email = $request->email;
+            $insert->contact=$request->contact;
+            $insert->dob=$request->dob;
+            $insert->password = Hash::make($request->password);
+            $insert->save();
+
+            $teacherId= $insert->id;
+        
+          
+
+            for($i=0;$i<count($request->class);$i++){
+
+               TeacherClass::insert([
+
+                'teacherId'=>$teacherId,
+                'class'=>$request->class[$i],
+
+               ]);
+
+            }
+
+            return redirect()->route('admin.all.teachers')->with('status','Teacher Added Successfully...');
+
+
+    }
+
+
+    public function notification()
+    {
+
+        $totalSum=array();
+
+        $data= Groups::all();
+ 
+            foreach($data as $item)
+            {
+                $sum=DB::table('teacher_assign_points')->where('groupId',$item->id)->sum('point');
+                $groupName=DB::table('groups')->where('id',$item->id)->first();
+     
+                $merge=$groupName->groupName.' '.$sum;
+               array_push($totalSum,$merge);
+            
+                
+            }
+            
+
+            return $totalSum;
+              max();
+
     }
 
 }

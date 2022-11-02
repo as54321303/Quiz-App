@@ -38,6 +38,18 @@
           {{ session()->forget('err_msg') }}
         @endif
 
+        @if (\Session::has('status'))
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {!! \Session::get('status') !!}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    
+          @endif
+
+
         <div class="card-body">
             <div class="heading-layout1">
                 <h3>All Groups</h3>
@@ -54,8 +66,8 @@
                             <th>S.No</th>
                             <th>Group Name</th>
                             <th>Class</th>
-                            <th>Total Members</th>
-                            <th>Points</th>
+                            <th>Assignment</th>
+                            <th class="text-center">Points</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,16 +86,67 @@
                                 {{ $rows->class }}
                             </td>
                             <td>
-                                {{ $rows->totalMember }}
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignment{{$rows->id}}">
+                                Assign
+                              </button> 
                             </td>
-                            <td>
+                            <td  class="text-center">
                                 <a href="{{route('teacher.show.point',$rows->id)}}"><button class="btn btn-primary">Show Points</button></a>
+                                <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign Points</button></a>
                             </td>
                             <td>
-                              <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Show</button></a>
-                              <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign</button></a>
+                              <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Group Details</button></a>
+                              
                             </td>
                         </tr>
+                        @php
+                            $i++;
+                        @endphp
+
+
+
+
+         <!-- Modal -->
+  <div class="modal fade" id="assignment{{$rows->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <form action="{{ route('teacher.assign.assignment') }}" method="post">
+              @csrf
+              
+              <input type="hidden" name="groupId" value="{{$rows->id}}">
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" class="form-control form-control-sm mb-3" id="subject" name="subject" placeholder="Enter subject name..." required>
+                </div>
+
+                <div class="form-group">
+                  <label for="assignment">Assignment</label>
+                   <textarea name="assignment" class="form-control" id="assignment" cols="30" rows="10" required></textarea>
+                </div>
+
+      
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary mt-3">Assign</button>
+            </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
                         @endforeach 
                     </tbody>
 
@@ -172,6 +235,8 @@
 
         });
 
+
+        
       });
 </script>
     

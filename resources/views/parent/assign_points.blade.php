@@ -131,6 +131,15 @@
                                 <input type="number" class="form-control" name="selfConfidence" style="width: 30%" placeholder="..." id="point_value">
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>12</td>
+                            <td>Obedient</td>
+                            <td>
+                                <input type="number" class="form-control" name="obedient" style="wclassth: 30%" placeholder="..." id="point_value">
+                            </td>
+                        </tr>
+                        
                     </tbody>
                 
                 </table>

@@ -25,6 +25,14 @@
                 <div class="item-title">                 
                 </div>
             </div>
+
+            <div class="float-right">
+                <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                <label class="form-check" for="checkAll">
+                  Check to select all
+                </label>
+              </div>
+
             <form action="{{url('teacher/post-assign-points')}}" method="post">
                 @csrf
             <div class="table-responsive">
@@ -112,7 +120,14 @@
                             <td>11</td>
                             <td>Self Confidence</td>
                             <td>
-                                <input type="number" class="form-control" name="selfConfidence" style="width: 30%" placeholder="..." id="point_value">
+                                <input type="number" class="form-control" name="selfConfidence" style="width: 30%" placeholder="..." class="point_value">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Obedient</td>
+                            <td>
+                                <input type="number" class="form-control" name="obedient" style="wclassth: 30%" placeholder="..." id="point_value">
                             </td>
                         </tr>
                     </tbody>
@@ -132,4 +147,31 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+
+ <script>
+                $(document).ready(function(){
+
+                    console.log($('.point_value').length);
+
+                    if( $( "input:checked")){
+
+                        
+                        $('#point_value').val(10);
+
+
+                    }
+
+                    else{
+                        $('#point_value').val();
+                        
+                    }
+                      
+
+
+                });
+ </script>
+    
 @endsection

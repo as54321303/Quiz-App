@@ -205,7 +205,8 @@ class TeacherController extends Controller
     {
         $teacherId = session()->get('teacherId');
         $data = Groups::where('createdByTeacherId', $teacherId)->orderBy('id','desc')->get();
-
+//         $totalPoints=Groups::where('createdByTeacherId', $teacherId)->join('teacher_assign_points','groups.id','=','teacher_assign_points.groupId')->get();
+// return $totalPoints;
         $class = TeacherClass::where('teacherId', $teacherId)->get();
         return view('teacher.groups.index', ['data'=>$data, 'class'=>$class]);
     }
@@ -240,9 +241,28 @@ class TeacherController extends Controller
      */
     public function getStudentList($class)
     {
-        $data = Student::where('class', $class)->get();
+
+        $notAssignedStudents=array();
+        $students=Student::where('class',$class)->get();
+
+        foreach($students as $check){
+
+           $check2= DB::table('student_group')->where('studentId',$check->id)->get()->count();
+
+            if(!$check2)
+            {
+
+                    $studentData= Student::where('class','=',$class)->where('id',$check->id)->first();
+
+                    array_push($notAssignedStudents,$studentData);
+
+            }
+
+        }
+
+
         $option = '';
-        foreach($data as $rows){
+        foreach($notAssignedStudents as $rows){
             $option .= "<option value='$rows->id'>$rows->name</option>";
         }
         return $option;
@@ -255,6 +275,49 @@ class TeacherController extends Controller
     //    return $students;
         return view('teacher.groups.group_detail',['students'=>$students]);
     }
+
+
+    public function remove_group_member($sId)
+    {
+
+        DB::table('student_group')->where('studentId',$sId)->delete();
+        return back()->with('status','Group Member Deleted');
+    }
+
+    public function add_group_member(Request $request)
+    {
+        $groupId= $request->groupId;
+
+
+        for($i = 0; $i< count($request->students); $i++){
+            DB::table('student_group')->insert([
+                "groupId" => $groupId,
+                "studentId" => $request->students[$i]
+            ]);
+        }
+
+        return redirect()->back()->with('status','Member Added Successfully!');
+
+
+    }
+
+
+    public function studentFeedback(Request $request)
+    {
+
+
+        $teacherId=session('teacherId');
+        DB::table('teacher_feedbacks')->insert([
+            'teacherId'=>$teacherId,
+            'studentId'=>$request->studentId,
+            'title'=>$request->title,
+            'description'=>$request->description,
+        ]);
+
+        return redirect()->back()->with('status','Feedback sent successfully!');
+
+    }
+
 
     public function showPoint($groupId)
     {
@@ -270,7 +333,6 @@ class TeacherController extends Controller
  
         return view('teacher.groups.show_points',compact('totals','details'));
    
-
     }
 
     public function assign_points($groupId)
@@ -296,6 +358,7 @@ class TeacherController extends Controller
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Leadership' , 'point'=> $request->leadership],
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Determined' , 'point'=> $request->determined],
             ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Self-Confidence' , 'point'=> $request->selfConfidence],
+            ['groupId' => $request->groupId ,'teacherId' => $teacherId ,'reason'=>'Obedient' , 'point'=> $request->obedient],
        ];
        
        $insert = DB::table('teacher_assign_points')->insert($array);
@@ -310,4 +373,32 @@ class TeacherController extends Controller
        }
 
     }
+
+    public function assignAssignment(Request $request)
+    {
+        // return $request->all();
+
+        $teacherId=session('teacherId');
+        DB::table('group_projects')->insert([
+
+            'teacherId'=>$teacherId,
+            'groupId'=>$request->groupId,
+            'subject'=>$request->subject,
+            'assignment'=>$request->assignment,
+            'created_at'=>\Carbon\Carbon::now()->toDateTimeString(),
+
+        ]);
+
+
+        return redirect()->back()->with('status','Assignment assigned successfully');
+    }
+
+
+    public function viewAssignment($groupId)
+    {
+        $teacherId=session('teacherId');
+        $assignments=DB::table('group_projects')->where('teacherId',$teacherId)->where('groupId',$groupId)->get();
+        return view('teacher.groups.viewAssignments',['assignments'=>$assignments]);
+    }
+
 }

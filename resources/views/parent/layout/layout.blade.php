@@ -120,24 +120,13 @@
                </div>
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
+
                         <li class="nav-item sidebar-nav-item">
                             <a href="{{route('parent.dashboard')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Dashboard</span></a>
-                            <!-- <ul class="nav sub-group-menu sub-group-active">
-                                <li class="nav-item">
-                                    <a href="index.html" class="nav-link"><i class="fas fa-angle-right"></i>Admin</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="index3.html" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Students</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="index4.html" class="nav-link menu-active"><i class="fas fa-angle-right"></i>Parents</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="index5.html" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Teachers</a>
-                                </li>
-                            </ul> -->
+                        </li>
+
+                        <li class="nav-item sidebar-nav-item">
+                            <a href="{{route('parent.teacher.feedback')}}" class="nav-link"><i class="flaticon-dashboard"></i><span>Feedbacks</span></a>
                         </li>
                         <!-- <li class="nav-item sidebar-nav-item">
                             <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
