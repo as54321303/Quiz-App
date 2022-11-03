@@ -192,6 +192,8 @@ class ParentController extends Controller
         
     }
 
+    // public function showKid
+
     public function assign_points($kidId)
     {
         return view('parent.assign_points', ['kidId' => $kidId]);
