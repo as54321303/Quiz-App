@@ -68,9 +68,9 @@
                         <!-- <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
                         <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> -->
                     </ol>
-                    <div class="widget-49-meeting-action">
+                    {{-- <div class="widget-49-meeting-action">
                         <a href="#" class="btn btn-sm btn-flash-border-primary">More...</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

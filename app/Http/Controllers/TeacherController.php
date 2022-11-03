@@ -337,7 +337,7 @@ class TeacherController extends Controller
     {
 
         DB::table('student_group')->where('studentId',$sId)->delete();
-        return back()->with('status','Group Member Deleted');
+        return back()->with('status','Group Member Removed');
     }
 
     public function add_group_member(Request $request)

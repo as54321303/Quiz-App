@@ -1,6 +1,6 @@
 @extends('student.layout.layout')
 
-@section('title','Student::Group Points')
+@section('title','Student::Assignments')
 
 @section('styles')
 
@@ -35,67 +35,38 @@
       @endif
     <!-- Breadcubs Area End Here -->
     <!-- Student Table Area Start Here -->
-    <div class="card height-auto">
+    <div class="card text-center">
+        <div class="card-header bg-primary text-white">
+          ASSIGNMENTS
+        </div>
         <div class="card-body">
-            <div class="heading-layout1">
-
-                <h3>Assignments</h3>
-
-            </div>
-
-            <div class="kids-details-wrap">
-                <div class="row">
-                    @php
-                        $i=1;
-                    @endphp
-                    @foreach($assignments as $assignment)
-                            <div class="col-12-xxxl col-xl-6 col-12 border">
-                                <div class="kids-details-box mb-5 mt-5">
-    
-                                    <h4 class="float-right">Submit To: {{$assignment->name}}</h4>
-                                    <h4>Subject: ({{$assignment->subject}})</h4>
-                               
-                                    <h4>Assignment:</h4><p>{{$assignment->assignment}}</p>
-                                    {{-- {{}} --}}
-
-                                    {{-- <div class="item-content table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Sr. No.</th>
-                                                    <th>Subject</th>
-                                                    <th>Assignment</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>{{$i}}</td>
-                                                    <td>{{ $assignment->subject }}</td>
-                                                    <td>
-                                                        {{ $assignment->assignment }}
-                                                    </td>
-                                                </tr>
-        
-                                        @php
-                                            $i++;
-                                        @endphp
-
-                                            </tbody>
-                                        </table>
-                                    </div> --}}
-                                </div>
-                            </div>
-
-                            <hr>
-
-                    @endforeach
+           
+            <div class="row mt-5">
+                @foreach ($assignments as $assignment)
                     
+                
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title float-left">Subject: {{$assignment->subject}}</h5>
+                        <h5 class="card-title float-right">Submit To: ({{$assignment->name}})</h5>
+                    </div>
+                    <div class="card-body">
+                     
+                      <p class="card-text">{{$assignment->assignment}}</p>
+                      {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+                    </div>
+                  </div>
                 </div>
-            </div>
+
+                @endforeach
+
+              </div>
 
         </div>
+
     </div>
+    {{-- </div> --}}
     <!-- Student Table Area End Here -->
     <footer class="footer-wrap-layout1">
         <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a

@@ -28,12 +28,12 @@
                 </div>
             </div>
 
-            <div class="float-right">
+            {{-- <div class="float-right">
                 <input class="form-check-input" type="checkbox" value="" id="checkAll">
                 <label class="form-check" for="checkAll">
                   Check to select all
                 </label>
-              </div>
+              </div> --}}
 
             <form action="{{url('teacher/post-assign-points')}}" method="post">
                 @csrf

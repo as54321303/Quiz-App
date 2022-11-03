@@ -194,7 +194,7 @@ class AdminController extends Controller
             "email" => "required|email|unique:teachers",
             "contact" => "required|digits:10",
             "class"=>"required",
-            "dob"=>"required",
+            // "dob"=>"required",
             "password" => "min:8|required_with:password_confirmation",
             "password_confirmation" => "min:8|same:password"
         ]);

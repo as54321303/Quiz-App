@@ -10,7 +10,7 @@
         <h3>Students</h3>
         <ul>
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{route('teacher.dashboard')}}">Home</a>
             </li>
             <li>Student Details</li>
         </ul>
@@ -36,7 +36,15 @@
             </div>
             <div class="single-info-details">
                 <div class="item-img">
+                    @if ($details->profilePic==NULL)
+                    
+                    <img src="{{url('public/dummyImages/dummy_user.jpeg')}}" alt="student" style="width:280px;hight:330px;">
+                    
+                    @else
+
                     <img src="{{$details->profilePic}}" alt="student" style="width:280px;hight:330px;">
+
+                    @endif
                 </div>
                 <div class="item-content">
                     <div class="header-inline item-header">
@@ -121,14 +129,15 @@
                 <h3>Past Quizzes</h3>
             </div>
             <div class="table-responsive">
-                <table class="table display data-table text-nowrap">
+                <table class="table display text-nowrap">
                     <thead>
                         <tr>
                             <th>
-                                <div class="form-check">
+                                <label class="form-check-label">Sr.No.</label>
+                                {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input checkAll">
-                                    <label class="form-check-label">Roll</label>
-                                </div>
+                                    
+                                </div> --}}
                             </th>
                             <th>Photo</th>
                             <th>Name</th>
@@ -141,10 +150,11 @@
                     <tbody>
                         <tr>
                             <td>
-                                <div class="form-check">
+                                <label class="form-check-label">1</label>
+
+                                {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
-                                </div>
+                                </div> --}}
                             </td>
                             <td class="text-center"><img src="{{url('assets/teacher/img/figure/student2.png')}}" alt="student"></td>
                             <td>Mark Willy</td>
@@ -155,10 +165,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="form-check">
+                                <label class="form-check-label">2</label>
+                                {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
-                                    <label class="form-check-label">#0021</label>
-                                </div>
+                                   
+                                </div> --}}
                             </td>
                             <td class="text-center"><img src="{{url('assets/teacher/img/figure/student2.png')}}" alt="student"></td>
                             <td>Mark Willy</td>
