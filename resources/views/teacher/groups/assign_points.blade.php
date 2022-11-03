@@ -21,8 +21,10 @@
     <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
-                <h3>Group Name : ({{$group->groupName}})</h3>
-                <div class="item-title">                 
+               
+                <div class="item-title">  
+                        <h3>Group Name : {{$group->groupName}}</h3>
+                        <h3>Student Name : {{$student->name}}</h3>               
                 </div>
             </div>
 
@@ -127,13 +129,14 @@
                             <td>12</td>
                             <td>Obedient</td>
                             <td>
-                                <input type="number" class="form-control" name="obedient" style="wclassth: 30%" placeholder="..." id="point_value">
+                                <input type="number" class="form-control" name="obedient" style="width: 30%" placeholder="..." id="point_value">
                             </td>
                         </tr>
                     </tbody>
                 
                 </table>
                 <input type="hidden" name="groupId" value="{{$group->id}}">
+                <input type="hidden" name="studentId" value="{{$student->id}}">
             </div>
                 <button class="btn btn-primary" type="submit" style="font-size:20px;margin-left:40%">Assign</button>
             </form>
@@ -141,8 +144,7 @@
     </div>
     <!-- Student Table Area End Here -->
     <footer class="footer-wrap-layout1">
-        <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                href="#">PsdBosS</a></div>
+        <div class="copyright">Designed and Developed by Quantum IT Innovation</div>
     </footer>
 </div>
 
@@ -159,13 +161,13 @@
                     if( $( "input:checked")){
 
                         
-                        $('#point_value').val(10);
+                        $('.point_value').val(10);
 
 
                     }
 
                     else{
-                        $('#point_value').val();
+                        $('.point_value').val();
                         
                     }
                       

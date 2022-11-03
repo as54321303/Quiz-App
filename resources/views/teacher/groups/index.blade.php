@@ -66,8 +66,6 @@
                             <th>S.No</th>
                             <th>Group Name</th>
                             <th>Class</th>
-                            <th>Assignment</th>
-                            <th class="text-center">Points</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -84,15 +82,6 @@
                             </td>
                             <td>
                                 {{ $rows->class }}
-                            </td>
-                            <td>
-                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assignment{{$rows->id}}">
-                                Assign
-                              </button> 
-                            </td>
-                            <td  class="text-center">
-                                <a href="{{route('teacher.show.point',$rows->id)}}"><button class="btn btn-primary">Show Points</button></a>
-                                <a href="{{route('teacher.assign.points',$rows->id)}}"><button class="btn btn-primary">Assign Points</button></a>
                             </td>
                             <td>
                               <a href="{{route('teacher.group.show',$rows->id)}}"><button class="btn btn-primary">Group Details</button></a>
@@ -142,11 +131,6 @@
       </div>
     </div>
   </div>
-
-
-
-
-
                         @endforeach 
                     </tbody>
 
@@ -155,8 +139,6 @@
                             <th>S.No</th>
                             <th>Group Name</th>
                             <th>Class</th>
-                            <th>Total Members</th>
-                            <th>Total Points</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
