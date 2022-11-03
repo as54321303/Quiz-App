@@ -1,6 +1,4 @@
-<?php echo "heello";
-    exit;
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -185,7 +183,7 @@
             <div class="row ">
                 <div class="col col-md-3 col-sm-6 col-12 my-2 d-flex justify-content-center">
                     <div class="card" style="width: 16rem;">
-                        <img class="card-img-top imageHov" src="{{ url('assets/auth_assets/boy1-removebg-preview.png" alt="Card image cap">
+                        <img class="card-img-top imageHov" src="{{ url('assets/auth_assets/boy1-removebg-preview.png')}}" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title font-weight-bold text-center imageHov1">Emma Watson</h5>
                           <div class="row justify-content-center d-flex">

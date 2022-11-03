@@ -72,13 +72,27 @@ class StudentController extends Controller
     {
         $studentId=session('studentId');
         $group=DB::table('student_group')->where('studentId',$studentId)->first();
-        $groupDetails=DB::table('student_group')->where('groupId','=',$group->groupId)->join('groups','student_group.groupId','=','groups.id')
-        ->join('students','student_group.studentId','=','students.id')->get();
-        // return $groupDetails;
-        $totalPoints=DB::table('teacher_assign_points')->where('groupId','=',$group->groupId)->sum('point');
-   
+        // return $group;
+        if($group){
 
-        return view('student.group.index',compact('groupDetails','totalPoints'));
+            $groupDetails=DB::table('student_group')->where('student_group.groupId','=',$group->groupId)->join('groups','student_group.groupId','=','groups.id')
+            ->join('students','student_group.studentId','=','students.id')->get();
+
+            $students=DB::table('student_group')->where('student_group.groupId','=',$group->groupId)->get();
+           $totalPoints=0;
+            foreach($students as $student)
+            {
+                $totalPoints+= DB::table('teacher_assign_points')->where('studentId',$student->studentId)->sum('point');
+            }
+
+            
+            return view('student.group.index',compact('groupDetails','totalPoints'));
+
+        }
+
+        return "You have not inserted in any group yet!";
+
+
     }
 
     public function groupPoints($groupId)
@@ -128,7 +142,7 @@ class StudentController extends Controller
 
         $assignments=DB::table('group_projects')->where('groupId',$group->groupId)
         ->join('teachers','group_projects.teacherId','=','teachers.id')->get();
-
+// return $assignments;
         return view('student.assignment.index',compact('assignments'));
 
     }

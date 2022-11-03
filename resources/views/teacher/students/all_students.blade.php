@@ -10,7 +10,7 @@
         <h3>Students</h3>
         <ul>
             <li>
-                <a href="">Home</a>
+                <a href="{{route('teacher.dashboard')}}">Home</a>
             </li>
             <li>All Students</li>
         </ul>
@@ -42,10 +42,10 @@
                 </div>
             </form>
             <div class="table-responsive">
-                <table class="table display data-table text-nowrap">
+                <table class="table display  text-nowrap">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Sr. No.</th>
                             {{-- <th>Photo</th> --}}
                             <th>Name</th>
                             <th>Gender</th>
