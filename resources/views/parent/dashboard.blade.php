@@ -3,11 +3,11 @@
 @section('title','Parent-Dashboard')
     
 @section('content')
-
+    
 <div class="dashboard-content-one">
     <!-- Breadcubs Area Start Here -->
 
-
+    @csrf
 
     <div class="breadcrumbs-area">
         <h3>Parent Dashboard</h3>
@@ -104,18 +104,14 @@
                             @foreach($kids as $kid)
                                     <div class="col-12-xxxl col-xl-6 col-12">
                                        
-                                        <div class="kids-details-box mb-5">
+                                        <div class="kids-details-box mb-5 hover" id="{{ $kid->id }}">
                                             
                                             <div class="item-img">
                                                 @if($kid->profilePic==NULL)
-
-                                                <img src="{{url('public/dummyImages/image1.jpg')}}" alt="kids" style="height:98px;width:98px;">
-
-
+                                                    <img src="{{url('public/dummyImages/image1.jpg')}}" alt="kids" style="height:98px;width:98px;">
                                                 @else 
-
-                                                <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
-                                          @endif
+                                                    <img src="{{$kid->profilePic}}" alt="kids" style="height:98px;width:98px;">
+                                                @endif
                                             </div>
                                           
 
@@ -134,7 +130,7 @@
                                                         <tr>
                                                             <td>Name:</td>
                                                             <td>
-                                                                <a href="#">
+                                                                <a href="#" >
                                                                     {{ $kid->name }}
                                                                 </a>
                                                             </td>
@@ -168,7 +164,12 @@
                                     </div>
 
 
-
+                                    <div id="popover_html" style="display:none;">
+                                        <!-- <p><img src="images/p_image" class="img-responsive img-thumbnail" /></p>   -->
+                                        <p class="h4"><label>Group Assigned to :</label>g_name</p>    
+                                        <p class="h4"><label>Points given by Teacher :</label>t_points</p>    
+                                        <p class="h4"><label>Points given by Parent :</label>p_points</p>	
+                                    </div>	
 
                                     
                             <div class="modal fade" id="feedback{{$kid->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -296,5 +297,47 @@
 
     <!-- Dashboard Content End Here -->
 </div>
+    
+@endsection
+
+@section('scripts')
+
+ <script>
+                jQuery(document).ready(function(){ 	
+                    jQuery('.hover').popover({  
+                        title: popoverContent,  
+                        html: true,  
+                        placement: 'right',  
+                        trigger: 'hover'
+                    }); 
+                }); 
+
+
+    function popoverContent() {  
+		var content = '';  
+		var element = $(this);  
+		var id = element.attr("id");  
+        
+		$.ajax({  
+			url: "{{ route('parent.getStudentPoint') }}",  
+			method: "POST",  
+			async: false,  	
+			// headers:
+            //     { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            data:{	
+				id : id
+			},  
+			dataType: "JSON",
+			success:function(data){  
+                console.log(data);
+				content = $("#popover_html").html();				
+				content = content.replace(/g_name/g, data.groupName);	
+				content = content.replace(/t_points/g, data.teacherPoints);	
+				content = content.replace(/p_points/g, data.parentPoints);				
+			}  
+		});  
+		return content;  
+	} 
+ </script>
     
 @endsection

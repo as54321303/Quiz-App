@@ -143,10 +143,10 @@ Route::prefix('parent')->group(function () {
     Route::get('signup',[ParentController::class,'signup'])->name('parent.signup');
     Route::post('signup-post',[ParentController::class,'signup_post'])->name('parent.signup.post');
 
+    Route::post('kidPoints', [ParentController::class,'kidPoints'])->name('parent.getStudentPoint');  
 
     Route::middleware(['CheckParentLogin'])->group(function(){
 
-        
             Route::get('dashboard',[ParentController::class,'parent_dashboard'])->name('parent.dashboard');  
             Route::get('addkid',[ParentController::class,'parent_addkid'])->name('parent.addKid');
             Route::post('addkidPost',[ParentController::class,'parent_addkidPost'])->name('parent.kid.post');

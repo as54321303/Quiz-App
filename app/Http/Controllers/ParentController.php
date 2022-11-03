@@ -193,6 +193,45 @@ class ParentController extends Controller
     }
 
     // public function showKid
+    public function kidPoints(Request $request)
+    {
+        $group = DB::table('student_group')
+                ->join('groups', 'groups.id', '=', 'student_group.groupId')
+                ->where('studentId', $request->id) 
+                ->get('groups.groupName');  
+        if(count($group) == 0) {
+            $groupName = 'None';
+        } else {
+            $groupName = $group[0]->groupName;
+        }      
+       
+        $teacherPoints = 0;
+        $tPoints = DB::table('teacher_assign_points')->where('studentId', $request->id)->get();
+        if(empty($tPoints)) {
+            $teacherPoints = 0;
+        } else {
+            foreach($tPoints as $points){
+                $teacherPoints += $points->point;
+            }
+        }
+        
+        $parentPoints = 0;
+        $pPoints = DB::table('parents_assign_points')->where('studentId', $request->id)->get();
+        if(empty($pPoints)) {
+            $parentPoints = 0;
+        } else {
+            foreach($pPoints as $pp){
+                $parentPoints += $pp->point; 
+            }
+        }
+
+        $result = new \StdClass;
+        $result->teacherPoints = $teacherPoints; 
+        $result->parentPoints = $parentPoints;
+        $result->groupName = $groupName;
+        return $result; 
+
+    }
 
     public function assign_points($kidId)
     {
