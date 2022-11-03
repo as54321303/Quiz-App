@@ -10,7 +10,7 @@
         <h3>Students</h3>
         <ul>
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{route('teacher.dashboard')}}">Home</a>
             </li>
             <li>Student Details</li>
         </ul>
@@ -36,7 +36,15 @@
             </div>
             <div class="single-info-details">
                 <div class="item-img">
+                    @if ($details->profilePic==NULL)
+                    
+                    <img src="{{url('public/dummyImages/dummy_user.jpeg')}}" alt="student" style="width:280px;hight:330px;">
+                    
+                    @else
+
                     <img src="{{$details->profilePic}}" alt="student" style="width:280px;hight:330px;">
+
+                    @endif
                 </div>
                 <div class="item-content">
                     <div class="header-inline item-header">
@@ -142,7 +150,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <label class="form-check-label">#0021</label>
+                                <label class="form-check-label">1</label>
 
                                 {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
@@ -157,7 +165,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="form-check-label">#0021</label>
+                                <label class="form-check-label">2</label>
                                 {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input">
                                    

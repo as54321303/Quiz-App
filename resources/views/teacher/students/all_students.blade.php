@@ -10,7 +10,7 @@
         <h3>Students</h3>
         <ul>
             <li>
-                <a href="">Home</a>
+                <a href="{{route('teacher.dashboard')}}">Home</a>
             </li>
             <li>All Students</li>
         </ul>
