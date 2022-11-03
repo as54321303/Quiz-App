@@ -35,37 +35,51 @@
       @endif
     <!-- Breadcubs Area End Here -->
     <!-- Student Table Area Start Here -->
-    <div class="card text-center">
-        <div class="card-header bg-primary text-white">
-          ASSIGNMENTS
-        </div>
-        <div class="card-body">
-           
-            <div class="row mt-5">
-                @foreach ($assignments as $assignment)
-                    
-                
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title float-left">Subject: {{$assignment->subject}}</h5>
-                        <h5 class="card-title float-right">Submit To: ({{$assignment->name}})</h5>
-                    </div>
-                    <div class="card-body">
-                     
-                      <p class="card-text">{{$assignment->assignment}}</p>
-                      {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
-                    </div>
+
+
+    <div class="container">
+      <div class="row">
+          @foreach($assignments as $assign)
+          <div class="col-lg-4">
+              <div class="card card-margin">
+                  <div class="card-header no-border">
+                      <h5 class="card-title"></h5>
                   </div>
-                </div>
+                  <div class="card-body pt-0">
+                      <div class="widget-49">
+                          <div class="widget-49-title-wrapper">
+                              <div class="widget-49-date-primary mb-5">
+                                  {{-- <span class="widget-49-date-day">{{ $assign->created_at }}</span> --}}
+                                  {{-- <span class="widget-49-date-month">{{ $assign->month }}</span> --}}
+                              </div>
+                              <div class="widget-49-meeting-info">
+                                <h5 class="float-right mb-5">Submit To: {{$assign->name}}</h5>
 
-                @endforeach
-
+                                <h5 class="widget-49-pro-title float-right">{{ $assign->subject }}</h5>
+                              
+                                  {{-- <span class="widget-49-meeting-time">{{ $assign->fullDate }}</span> --}}
+                              </div>
+                          </div>
+                          <ol class="widget-49-meeting-points">
+                              <li class="widget-49-meeting-item"><span>{{ $assign->assignment }}</span></li>
+                              <!-- <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
+                              <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li> -->
+                          </ol>
+                          {{-- <div class="widget-49-meeting-action">
+                              <a href="#" class="btn btn-sm btn-flash-border-primary">More...</a>
+                          </div> --}}
+                      </div>
+                  </div>
               </div>
+          </div>
+          @endforeach
+      </div>
+      </div>
 
-        </div>
 
-    </div>
+
+
+
     {{-- </div> --}}
     <!-- Student Table Area End Here -->
     <footer class="footer-wrap-layout1">
