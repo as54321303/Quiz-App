@@ -246,7 +246,7 @@ class TeacherController extends Controller
         $insert->createdByTeacherId = $teacherId;
         $insert->groupName = $request->group_name;
         $insert->class = $request->class;
-        $insert->totalMember = $totalMember;
+        // $insert->totalMember = $totalMember;
         $insert->save();
 
         $groupId = $insert->id;
