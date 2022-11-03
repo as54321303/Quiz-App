@@ -11,56 +11,79 @@
         body {
             width: 100vw;
             height: 100vh;
+            
+            
+        }
+        .bg{
+
+
+            background-image: url(https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjc4M2JhdGNoNS1hZXctMjBfMS5qcGc.jpg);
+            height:100%;
+            width:100%;
+            position:absolute;
+
+ 
+
         }
         .box{
-            width: 30vw
+            width: 30vw;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+           position: relative;
+           left:5%;
+           top:10%;
+           background-color: aliceblue;
+           padding: 1%;
+           border-radius: 3%;
 
         }
     </style>
-    <title>Login</title>
+    <title>Student Login</title>
 </head>
 
 <body class="d-flex justify-content-center align-items-center ">
+    <div class="bg">
+    
     <div class="box">
-        <h1>Welcome back</h1>
- 
-        <ul class="pl-3">
-            <li class="font-weighted-bold">Loging in as Student</li>
-        </ul>
+        <div style="margin:50%" class="m-5">
 
-                    @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                
+                <h1>Welcome back</h1>
+                <p class="text-secondary">Welcome back ! Please enter your details.</p>
+                <ul class="pl-3">
+                    <li class="font-weighted-bold">Logging in as Student</li>
+                </ul>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="row">
+                    <div class="col-12">
+                        <!-- form here -->
+                        <form action="{{route('student.postLogin')}}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email </label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                name="userId" id="userId" placeholder="Enter your User Id">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="*******">
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <small class="text-right">
+                                    <a href="#" class="text-primary">Forgot Password?</a>
+                                </small>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-primary ml-0 my-2">Log in</button>
+                        </form>
+                    </div>
                 </div>
-            @endif
-
-        <div class="row">
-            <div class="col-12">
-                <!-- form here -->
-                <form action="{{route('student.postLogin')}}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="userId">User Id </label>
-                        <input type="text" class="form-control" name="userId" id="userId"
-                            placeholder="Enter your User Id">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="*******">
-                    </div>
-                    <div class="form-group d-flex justify-content-end">
-                        {{-- <small class="text-right">
-                            <a href="#" class="text-primary">Forgot Password?</a>
-                        </small> --}}
-                    </div>
-                    <button type="submit" class="btn btn-block btn-primary ml-0 my-2">Log in</button>
-                    {{-- <button type="submit" class="btn btn-block bg-white border border-black ml-0 my-2"> <img src="./asset/googIcon.png" width="30px" height="30px" alt="..."> Log in with Google</button> --}}
-                </form>
-            </div>
         </div>
 
     </div>
@@ -81,6 +104,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+ </div>
 </body>
 
 </html>
